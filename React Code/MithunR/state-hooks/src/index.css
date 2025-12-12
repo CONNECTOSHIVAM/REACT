@@ -1,0 +1,31 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'McLearn', cursive;;
+}
+html,body{
+  background: #232323;
+}
+.container{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.container h1{
+  color: aliceblue;
+  font-size: 12rem;
+}
+.container button{
+  margin-top: 2rem;
+  padding: 30px 30px;
+  border-radius: 1rem;
+  background: #000;
+  font-size: 5rem;
+  color: wheat;
+  border: none;
+}
+button:hover{
+  background: rgb(28, 28, 28);
+  border: 1px solid wheat;
+}
