@@ -30,7 +30,32 @@ function App() {
 
   return (
      <>
-      <h1 className='bg-orange-500 p-5 m-5 text-black text-5xl rounded-2xl'>Namsete</h1>
+      <div className='w-full max-w-md mx-auto shadow-md rounded-lg px-4 my-8 text-orange-600 bg-gray-900 p-5'>
+        
+          <h1 className='text-2xl text-center'>Password Generator</h1>
+          <div className='flex shadow rounded-lg overflow-hidden mb-4 bg-amber-50 m-3'>
+            <input type="text" placeholder='password' value={password} readOnly className='outline-none w-full py-1 px-3'/>
+            <button className='bg-amber-100 text-xl p-2 py-1.5 shrink-0 bg-amber-600 text-white outline-none'>copy</button>
+          </div>
+          <div className='flex text-sm gap-x-2'>
+              <div className='flex items-center gap-x-1'>
+                 <input type="range" min={6} max={100} value={length} className='outline-none cursor-pointer w-23 h-2 accent-amber-600' onChange={(e)=> {setLength(e.target.value)}} />
+                 <label htmlFor=""> Length: {length}</label>
+              </div>
+              <div className="flex items-center gap-x-1">
+                 <input 
+                    type="checkbox"
+                    defaultChecked = {numberAllowed} 
+                    id='numberInput'
+                    className='accent-amber-600'
+                    onChange={()=>{
+                      setNumberAllowed((prev)=> !prev);
+                    }}
+                    />
+                    <label htmlFor="numberInput">Number</label>
+              </div>
+          </div>
+      </div>
      </>
   )
 }
