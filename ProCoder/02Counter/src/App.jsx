@@ -1,33 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react'
 
-function App() {
-  
-  let [counter, setCounter] =useState(15)
+const App = () => {
 
-  const addValue = () => {
-       
-      setCounter(counter+1)
+  let [count, setCount] = useState(0)
+
+  function counterI(){
+    if(count>=0)
+    {
+      count = count + 1;
+      setCount(count)
+    }
   }
 
-  const decreaseValue = () =>{
-     if(counter>0)
-     {
-       setCounter(counter-1);
-     }
-     
+  function counterD()
+  {
+    if(count>0)
+    {
+      count = count - 1
+      setCount(count)
+    }
   }
 
+  function reset(){
+    setCount(0);
+  }
   return (
-   <>
-     <h1>Chai or Code</h1>
-     <h2>Counter value: {counter}</h2>
 
-     <button onClick={addValue}>Add value</button>
-     <button onClick={decreaseValue}>Decrease Value</button>
-   </>
+    
+    <div>
+       <h1>Counter App</h1>
+       <p>current count: {count}</p>
+       <button onClick={counterI}>+</button>
+       <button onClick={counterD}>-</button>
+       <button onClick={reset} >reset</button>
+    </div>
   )
 }
 
