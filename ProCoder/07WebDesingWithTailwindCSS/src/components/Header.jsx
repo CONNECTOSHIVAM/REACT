@@ -13,7 +13,6 @@ const Header = () => {
            <a href="">About us</a>
          </div>
          <Button text="Join Us"/>
-         {/* <button className='bg-[tomato] px-4 py-3 rounded-2xl'>Join US</button> */}
       </header>
     </div>
 
