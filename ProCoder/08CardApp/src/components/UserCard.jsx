@@ -5,7 +5,7 @@ import { FaLinkedin, FaXTwitter, FaInstagram, FaYoutube } from "react-icons/fa6"
 
 const UserCard = () => {
   return (
-    <div className='w-[20rem] h-[30rem] bg-amber-100 rounded-2xl justify-around m-10'>
+    <div className='w-[20rem] h-[30rem] bg-amber-100 rounded-2xl justify-around m-10 shadow-amber-500u'>
       <div className='relative w-[20rem] h-[11rem] bg-sky-200 rounded-2xl'>
         <img src="https://media.licdn.com/dms/image/v2/D4D03AQF8oP4q4fi5pg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1731502043627?e=2147483647&v=beta&t=iqZ6o7xVbsoraAFYyzLZw7b7HcCM-9AehVJZzyR_LuQ" alt="User Avatar" className='h-full aspect-square object-cover object-top rounded-full absolute translate-x-[42%] translate-y-[30%] border-3 border-amber-400 p-1.5 bg-amber-50' />
       </div>
