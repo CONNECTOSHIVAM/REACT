@@ -14,10 +14,7 @@ function App() {
         <UserCard/>
         <UserCard/>
         <UserCard/>
-        <UserCard/> 
-        <UserCard/>
-        <UserCard/>   
-        <UserCard/>
+     
       </div>
     </>
   )
