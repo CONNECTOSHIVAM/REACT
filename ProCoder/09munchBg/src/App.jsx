@@ -1,9 +1,10 @@
 import { useState } from "react";
 import Button from "./components/Button";
+import ColorBox from "./components/ColorBox";
 
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [color, setColor] = useState('transparent');
 
   const colors = [
     "#FF5733", // Red
@@ -25,12 +26,14 @@ function App() {
       <div className="flex items-center justify-center gap-5">
         {colors.map((color) => {
           return (
-            <Button label={color} color={color}>
+            <Button label={color} color={color} setColor={setColor}>
               {color}
             </Button>
           );
         })}
       </div>
+
+      <ColorBox color={color}/>
     </>
   );
 }
