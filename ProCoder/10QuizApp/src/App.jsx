@@ -1,8 +1,10 @@
 import { useState } from "react";
 import Buttons from "./components/Buttons";
+import Colorbox from "./components/Colorbox";
 
 function App() {
   const [count, setCount] = useState(0);
+  const [color, setColor] = useState("transparent");
 
   const colors = [
     "tomato",
@@ -27,12 +29,14 @@ function App() {
         {colors.map((color) => {
           
           return (
-            <Buttons label={color} color={color} >
+            <Buttons label={color} color={color} setColor={setColor} >
               {color}
             </Buttons>
           );
         })}
       </div>
+
+      <Colorbox/>
     </>
   );
 }
