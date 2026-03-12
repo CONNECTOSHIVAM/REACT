@@ -11,6 +11,7 @@ const Timer = () => {
             setLeftTime((prev)=> {
                 if(prev === 0){
                     clearInterval(timer);
+                    setIsOver(true);
                     return 0
                 }
                 return prev - 1
