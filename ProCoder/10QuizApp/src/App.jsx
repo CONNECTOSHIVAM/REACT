@@ -3,7 +3,7 @@ import Buttons from "./components/Buttons";
 import Colorbox from "./components/Colorbox";
 
 function App() {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
   const [color, setColor] = useState("transparent");
 
   const colors = [
@@ -31,12 +31,12 @@ function App() {
           return (
             <Buttons label={color} color={color} setColor={setColor} >
               {color}
-            </Buttons>
+            </Buttons >
           );
         })}
       </div>
 
-      <Colorbox/>
+      <Colorbox color={color}/>
     </>
   );
 }
