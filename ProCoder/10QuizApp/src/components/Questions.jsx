@@ -24,7 +24,7 @@ const Questions = ({ setIsOver, setScore }) => {
           return (
             <button
               className="w-35 p-4 border-4 border-double border-sky-400 text-sky-400 rounded-2xl  hover:border-amber-50 hover:text-amber-50 duration-500 ease-out"
-              key={option}der-double
+              key={option}
               onClick={() => {
                 handelOptionClick(option);
               }}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const Timer = () => {
+const Timer = ({setIsOver}) => {
 
     const [leftTime, setLeftTime] = useState(20);
     const [displayTime, setDisplayTime] = useState('');

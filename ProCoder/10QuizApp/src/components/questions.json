@@ -16,7 +16,7 @@
   },
   {
     "question": "What year was JavaScript launched?",
-    "options": ["1996", "1995", "1994", "none of the above"],
+    "options": ["1996", "1995", "1994", "none"],
     "answer": "1995"
   }
 ]
