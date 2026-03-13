@@ -1,8 +1,8 @@
 import React, { use, useEffect, useState } from 'react'
 
-const Timer = () => {
+const Timer = ({ setIsOver}) => {
 
-    const [leftTime, setLeftTime] = useState(10);
+    const [leftTime, setLeftTime] = useState(75);
     const [displayTime, setDisplayTime] = useState('');
     // time left logic
     useEffect(()=>{

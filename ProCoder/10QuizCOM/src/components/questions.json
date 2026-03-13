@@ -1,52 +1,52 @@
 [
   {
-    "question": "Which city will host the 2026 UN Climate Change Conference (COP31)?",
-    "options": ["Paris", "Antalya", "Nairobi", "New York"],
-    "answer": "Antalya"
-  },
-  {
-    "question": "Where will GLF Africa 2026: Stewarding Our Rangelands be held?",
-    "options": ["Cape Town", "Nairobi", "Lagos", "Cairo"],
-    "answer": "Nairobi"
-  },
-  {
-    "question": "Which ocean currently shows rising temperatures that may help prevent global droughts?",
-    "options": ["Atlantic", "Pacific", "Indian", "Arctic"],
-    "answer": "Pacific"
-  },
-  {
-    "question": "Which forests are releasing massive carbon emissions due to wildfires in 2026?",
-    "options": ["Amazon Rainforest", "Boreal Forests", "Congo Basin", "Taiga"],
-    "answer": "Boreal Forests"
-  },
-  {
-    "question": "K’gari, the world’s largest sand island, is located in which country?",
-    "options": ["Australia", "New Zealand", "South Africa", "Madagascar"],
-    "answer": "Australia"
-  },
-  {
-    "question": "Which continent has the largest population in 2026?",
-    "options": ["Africa", "Asia", "Europe", "South America"],
+    "question": "What is the largest continent by land area?",
+    "options": ["Africa", "Asia", "North America", "Europe"],
     "answer": "Asia"
   },
   {
-    "question": "Which desert remains the largest in the world?",
-    "options": ["Sahara", "Gobi", "Antarctic Desert", "Kalahari"],
+    "question": "Which country has the most islands?",
+    "options": ["Indonesia", "Sweden", "Philippines", "Norway"],
+    "answer": "Sweden"
+  },
+  {
+    "question": "What is the longest river in the world?",
+    "options": ["Amazon", "Nile", "Yangtze", "Mississippi"],
+    "answer": "Nile"
+  },
+  {
+    "question": "Which desert is the largest in the world?",
+    "options": ["Sahara", "Gobi", "Kalahari", "Antarctic Desert"],
     "answer": "Antarctic Desert"
   },
   {
-    "question": "Which country is experiencing major rangeland discussions in 2026 due to climate change?",
-    "options": ["Kenya", "Brazil", "India", "Canada"],
-    "answer": "Kenya"
+    "question": "Which country has the largest population?",
+    "options": ["India", "China", "United States", "Indonesia"],
+    "answer": "India"
   },
   {
-    "question": "Which mountain continues to be the highest in the world?",
-    "options": ["Mount Everest", "K2", "Denali", "Kangchenjunga"],
+    "question": "Which mountain is the highest in the world?",
+    "options": ["K2", "Mount Everest", "Kangchenjunga", "Makalu"],
     "answer": "Mount Everest"
   },
   {
-    "question": "Which ocean is the largest by area?",
+    "question": "Which ocean is the largest?",
     "options": ["Atlantic", "Indian", "Pacific", "Arctic"],
     "answer": "Pacific"
+  },
+  {
+    "question": "Which country is both in Europe and Asia?",
+    "options": ["Russia", "Turkey", "Kazakhstan", "All of the above"],
+    "answer": "All of the above"
+  },
+  {
+    "question": "Which city is known as the 'City of Canals'?",
+    "options": ["Venice", "Amsterdam", "Bangkok", "Bruges"],
+    "answer": "Venice"
+  },
+  {
+    "question": "Which country is home to the Great Barrier Reef?",
+    "options": ["Australia", "New Zealand", "Fiji", "Papua New Guinea"],
+    "answer": "Australia"
   }
 ]

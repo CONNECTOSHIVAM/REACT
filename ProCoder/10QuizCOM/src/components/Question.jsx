@@ -29,7 +29,7 @@ const Question = ({setScore, setIsOver}) => {
               onClick={() => {
                 handleOptionClick(option);
               }}
-              className="text-amber-50 border-3 border-double w-35 p-4 rounded-2xl mt-18 hover:text-green-800 duration-500 ease-in-out "
+              className="text-amber-50 border-3 border-double w-35 p-4 rounded-2xl mt-18 hover:text-green-800 duration-500 ease-linear "
             >
               {option}
             </button>
