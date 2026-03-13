@@ -18,5 +18,40 @@
     "question": "What year was JavaScript launched?",
     "options": ["1996", "1995", "1994", "none"],
     "answer": "1995"
+  },
+  {
+    "question": "Which HTML tag is used to define an unordered list?",
+    "options": ["<ul>", "<ol>", "<li>", "<list>"],
+    "answer": "<ul>"
+  },
+  {
+    "question": "Which company developed JavaScript?",
+    "options": ["Microsoft", "Netscape", "Google", "Sun Microsystems"],
+    "answer": "Netscape"
+  },
+  {
+    "question": "Which symbol is used for comments in JavaScript?",
+    "options": ["//", "#", "<!-- -->", "/* */"],
+    "answer": "//"
+  },
+  {
+    "question": "Which property in CSS is used to change text color?",
+    "options": ["font-color", "text-color", "color", "background-color"],
+    "answer": "color"
+  },
+  {
+    "question": "Which HTML attribute is used to define inline styles?",
+    "options": ["class", "style", "font", "styles"],
+    "answer": "style"
+  },
+  {
+    "question": "Which JavaScript method is used to write into the browser console?",
+    "options": ["console.write()", "console.log()", "log.console()", "print()"],
+    "answer": "console.log()"
+  },
+  {
+    "question": "Which HTML element is used to display a title in the browser tab?",
+    "options": ["<meta>", "<title>", "<head>", "<header>"],
+    "answer": "<title>"
   }
 ]
