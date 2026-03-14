@@ -5,6 +5,7 @@ function App() {
   const [flash, setFlash] = useState(false);
   const [flashOne, setFlashOne] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [visibleOne, setVisibleOne] = useState(false);
 
   const openFlash = () => {
     setFlash(true);
@@ -15,19 +16,19 @@ function App() {
 
   const openFlashOne = () => {
     setFlashOne(true);
-    setTimeout(()=>{setVisible(true)}, 15)
+    setTimeout(()=>{setVisibleOne(true)}, 15)
   };
 
   const closeFlash = () => {
-    setFlash(false);
+    setVisible(false);
     setTimeout(() => {
-      setVisible(false);
+      setFlash(false);
     }, 500);
   };
 
   const closeFlashOne = () =>{
-    setFlashOne(false);
-    setTimeout(()=> {setVisible(false)}, 500)
+    setVisibleOne(false);
+    setTimeout(()=> {setFlashOne(false)}, 500)
   }
 
   return (
@@ -48,7 +49,7 @@ function App() {
       </div>
 
       <Popup flash={flash} visible={visible} closeFlash={closeFlash} title={"Radhe radhe🙏"} description={"Main tumhari khoobi se nahi, tumhari kami se bhi pyaar karta hoon— kyunki tum poori tarah se real ho. Aur yahi mujhe sabse zyada pasand hai. Zindagi bhar ka saath maangta hoon — koi drama nahi, koi bada wada nahi. Bas tum, main, aur ek simple sa saath. Haan bologe? 🌹"} />
-      <Popup flash={flashOne} visible={visible} closeFlash={closeFlashOne} title={"Radhe radhe🙏"} description={"Of all the souls this world doth hold, mine eyes found rest in thee alone — not by chance, but by the quiet grace of fate. I ask not for forever. I ask only for thee — today, tomorrow, and every breath between. Say yes, and I shall spend this lifetime proving thou wert worth every moment of waiting. 🌹"} />
+      <Popup flash={flashOne} visible={visibleOne} closeFlash={closeFlashOne} title={"Radhe radhe🙏"} description={"Of all the souls this world doth hold, mine eyes found rest in thee alone — not by chance, but by the quiet grace of fate. I ask not for forever. I ask only for thee — today, tomorrow, and every breath between. Say yes, and I shall spend this lifetime proving thou wert worth every moment of waiting. 🌹"} />
 
     </>
   );

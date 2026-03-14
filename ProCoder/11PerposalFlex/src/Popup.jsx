@@ -4,7 +4,7 @@ const Popup = ({flash, visible, closeFlash, title, description}) => {
   return (
     <>
     {flash && (
-        <div className='absolute top-0 left-0 w-screen h-screen bg-[#232323] flex justify-center items-center transition-opacity duration-500 ease-out ${{visible} ? "opacity-100" : "opacity-0"}'>
+        <div className={ `absolute top-0 left-0 w-screen h-screen bg-[#232323] flex justify-center items-center transition-opacity duration-500 ease-out ${visible ? "opacity-100" : "opacity-0"}` }>
           <button
             onClick={closeFlash}
             className="absolute text-center p-4 border-2 text-orange-700 rounded-2xl top-[1rem] right-[1rem] hover:opacity-70 duration-500 ease-out"
