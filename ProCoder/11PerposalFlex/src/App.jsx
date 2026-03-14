@@ -35,13 +35,13 @@ function App() {
       <div className="flex justify-center items-center h-screen gap-8">
         <button
           onClick={openFlash}
-          className="w-65 p-4 bg-blue-500 text-3xl text-center font-bold font-mono border-2 rounded-4xl hover:border-amber-50 duration-500 ease-out hover:shadow-2xs"
+          className="w-65 p-4 bg-pink-700 text-3xl text-center font-bold font-mono border-2 rounded-4xl hover:border-amber-50 duration-500 ease-out hover:shadow-2xs"
         >
           punch me
         </button>
         <button
           onClick={openFlashOne}
-          className="w-65 p-4 bg-blue-500 text-3xl text-center font-bold font-mono border-2 rounded-4xl hover:border-amber-50 duration-500 ease-out hover:shadow-2xs"
+          className="w-65 p-4 bg-pink-900 text-3xl text-center font-bold font-mono border-2 rounded-4xl hover:border-amber-50 duration-500 ease-out hover:shadow-2xs"
         >
           hit me
         </button>
