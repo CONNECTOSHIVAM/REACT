@@ -19,9 +19,9 @@ function App() {
             <h1 className="text-center text-4xl text-orange-600 font-mono font-bold mt-8">radhe radhe🙏</h1>
             <p className="text-center text-lg text-amber-100 mt-4 font-serif ">Hanji, kaise ho aap? &nbsp; ek baat batau.. aap se Love sove ho gaya hai ji.. </p>
 
-            <div className="flex ">
-              <button className="w-32 p-4 bg-emerald-400 text-lg font-sans font-bold text-sky-900 border-[#10b981] rounded-2xl hover:border-sky-600 duration-500 ease-out">Love</button>
-              <button className="w-32 p-4 bg-red-400 text-lg font-sans font-bold text-sky-900 border-[#ef4444] rounded-2xl hover:border-sky-600 duration-500 ease-out ">Sachii..</button>
+            <div className="flex items-center justify-center gap-8 mt-10 ">
+              <button className="w-32 p-4 bg-emerald-400 text-lg font-sans font-bold text-sky-900 border-[#10b981] rounded-2xl hover:opacity-70 duration-500 ease-out">Love</button>
+              <button className="w-32 p-4 bg-red-400 text-lg font-sans font-bold text-sky-900 border-[#ef4444] rounded-2xl hover:opacity-70 duration-500 ease-out ">Sachii..</button>
             </div>
           </div>
         </div>
