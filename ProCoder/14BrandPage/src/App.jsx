@@ -1,9 +1,13 @@
 import React from 'react'
+import './App.css'
+import Navigation from './Components/Navigation'
+import Hero from './Components/Hero'
 
 const App = () => {
   return (
     <div>
-      <h1>radhe radhe</h1>
+       <Navigation/>
+       <Hero />
     </div>
   )
 }
