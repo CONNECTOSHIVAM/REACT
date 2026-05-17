@@ -32,3 +32,29 @@ nav ul{
   list-style: none;
   gap: 23px;
 }
+.hero{
+  display: flex;
+  height: calc(100vh - 72px);
+  align-items: center;
+}
+.hero h1{
+  font-weight: 800;
+  font-size: 107px;
+  line-height: 102px;
+}
+.hero p{
+  font-weight: 600;
+  color: var(--gray);
+}
+.hero-btn{
+  display: flex;
+  gap: 5px;
+}
+.shopping p{
+  font-size: 15px;
+  margin-bottom: 9px;
+}
+.brand-icons{
+  display: flex;
+  gap: 10px;
+}
