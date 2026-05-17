@@ -51,7 +51,7 @@ nav ul{
 }
 .hero-btn{
   display: flex; 
-  gap: 3px;
+  gap: 5px;
 }
 .shopping p{
   font-size: 14px;
@@ -60,4 +60,5 @@ nav ul{
 .brand-icons{
   display: flex;
   gap: 16px;
+
 }
