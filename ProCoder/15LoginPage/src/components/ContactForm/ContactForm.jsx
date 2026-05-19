@@ -6,22 +6,18 @@ import styles from "./ContactForm.module.css";
 import Button from "../Button/Button";
 
 const ContactForm = () => {
-
-   const [name, setName] = useState("ConnectoShivam");
-   const [email, setEmail] = useState("");
-   const [text, setText] = useState("");
-   let text;
+  const [name, setName] = useState("ConnectoShivam");
+  const [email, setEmail] = useState("connecto@momsnanhi.com");
+  const [text, setText] = useState("radhe radhe");
 
   const onSubmit = (event) => {
     event.preventDefault();
 
-    name = event.target[0].value;
-    email = event.target[1].value;
-    text = event.target[2].value;
+    setName(event.target[0].value);
+    setEmail(event.target[1].value);
+    setText(event.target[2].value);
+    
 
-    console.log("name : ",name," email: ",email," message: ",message);
-    
-    
   };
 
   return (
@@ -57,9 +53,7 @@ const ContactForm = () => {
             <Button text="SUBMIT"></Button>
           </div>
 
-          <div>
-            {name + " " + email + " " + text}
-          </div>
+          <div>{name + " " + email + " " + text}</div>
         </form>
       </div>
       <div className={styles.contact_image}>
