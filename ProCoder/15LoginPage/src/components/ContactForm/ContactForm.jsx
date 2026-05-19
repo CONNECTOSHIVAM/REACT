@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { MdMessage, MdCall, MdMarkEmailUnread } from "react-icons/md";
 
@@ -6,15 +6,21 @@ import styles from "./ContactForm.module.css";
 import Button from "../Button/Button";
 
 const ContactForm = () => {
+
+   const [name, setName] = useState("ConnectoShivam");
+   const [email, setEmail] = useState("");
+   const [text, setText] = useState("");
+   let text;
+
   const onSubmit = (event) => {
     event.preventDefault();
 
-    console.log(event);
-    
+    name = event.target[0].value;
+    email = event.target[1].value;
+    text = event.target[2].value;
 
-    console.log("name: ",event.traget[0].value);
-    console.log("email: ",event.traget[1].value);
-    console.log("message: ",event.traget[2].value);
+    console.log("name : ",name," email: ",email," message: ",message);
+    
     
   };
 
@@ -49,6 +55,10 @@ const ContactForm = () => {
           </div>
           <div style={{ display: "flex", justifyContent: "end" }}>
             <Button text="SUBMIT"></Button>
+          </div>
+
+          <div>
+            {name + " " + email + " " + text}
           </div>
         </form>
       </div>
