@@ -18,7 +18,7 @@ body{
   height: 72px;
 }
 
-nav button{
+button{
   all: unset;
   padding: 6px 16px;
   background-color: var(--red);
@@ -30,4 +30,33 @@ nav ul{
   display: flex;
   list-style: none;
   gap: 28px;
+}
+.hero-container{
+  margin: 0 auto;
+  max-width: 1280px;
+  display: flex;
+  align-items: center;
+  height: calc(100vh - 72px);
+}
+.hero-container h1{
+  font-weight: 800;
+  font-size: 108px;
+  line-height: 102px;
+}
+.hero-container p{
+  font-weight: 500;
+  color: var(--gray);
+}
+
+.hero-btn{
+  display: flex;
+  gap: 5px;
+}
+.shopping p{
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.brand-icons{
+  display: flex;
+  gap: 16px;
 }
