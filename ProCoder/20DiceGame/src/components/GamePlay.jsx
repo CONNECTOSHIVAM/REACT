@@ -5,11 +5,13 @@ import styled from 'styled-components'
 import RollDice from './RollDice'
 
 const GamePlay = () => {
+    const [selectedNumber, setSelectedNumber] = useState();
+    
   return (
     <MainContainer>
             <div className="top_section">
                 <TotalScore />
-                <NumberSelector/>
+                <NumberSelector selectedNumber={selectedNumber} setSelectedNumber={setSelectedNumber}/>
             </div>
             <RollDice />
     </MainContainer>

@@ -2,12 +2,8 @@ import React, { useState } from "react";
 
 import styled from "styled-components";
 
-const NumberSelector = () => {
+const NumberSelector = ({selectedNumber, setSelectedNumber}) => {
   const arrNumber = [1, 2, 3, 4, 5, 6];
-
-  const [selectedNumber, setSelectedNumber] = useState();
-
-  console.log(selectedNumber);
 
   return (
     <NumberSelectorContainer>
