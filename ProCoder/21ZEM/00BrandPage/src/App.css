@@ -12,7 +12,7 @@ body{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 15px;
+  height: 72px;
 }
 .container ul{
   display: flex;
@@ -32,4 +32,34 @@ button{
   border-radius: 2px;
   font-weight: 500;
   height: 25px;
+}
+.hero{
+  display: flex;
+  height: calc(100vh - 72px);
+  align-items: center;
+}
+.hero h1{
+  font-weight: 800;
+  font-size: 108px;
+  line-height: 102px;
+  margin-bottom: 45px;
+}
+.hero p{
+  font-weight: 500;
+  color: var(--gray);
+  margin-bottom: 15px;
+}
+.hero-btn{
+  display: flex;
+  gap: 5px;
+}
+.shopping p{
+  font-size: 21px;
+  color: var(--red);
+  margin-top: 15px;
+}
+.image-icons{
+  display: flex;
+  gap: 25px;
+  align-items: center;
 }
