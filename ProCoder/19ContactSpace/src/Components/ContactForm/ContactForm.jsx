@@ -39,7 +39,7 @@ const ContactForm = () => {
           </div>
           <Button isOutline={true} text="VIA MAIL FORM" icon={<MdMarkEmailUnread fontSize="24px" />}/>
 
-          <form onSubmit={onSubmit}>
+          <form onClick={onSubmit}>
             <div className={styles.form_control}>
                 <label htmlFor="name">Name</label>
                 <input type="text" name='name' />
