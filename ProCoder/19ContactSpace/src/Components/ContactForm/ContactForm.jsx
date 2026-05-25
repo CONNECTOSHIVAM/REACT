@@ -19,6 +19,8 @@ const ContactForm = () => {
 
     const onSubmit = (event) => {
 
+        event.preventDefault();
+
         setName(event.target[0].value);
         setEmail(event.target[1].value);
         setText(event.target[2].value);
