@@ -1,14 +1,9 @@
-import React, { useState } from "react";
 import styled from "styled-components";
 
-const RollDice = () => {
-  const [currentDice, setCurrentDice] = useState(1);
+const RollDice = ({ currentDice, rollDice }) => {
 
-  const rollDice = () => {
-    const randomNumber = Math.floor(Math.random() * 6) + 1;
-    setCurrentDice(randomNumber);
-  };
-
+    console.log(currentDice);
+    
   return (
     <DiceContainer>
       <div className="dice" onClick={rollDice}>
@@ -29,5 +24,8 @@ const DiceContainer = styled.div`
   align-items: center;
   .dice {
     cursor: pointer;
+  }
+  p{
+    font-size: 26px;
   }
 `;

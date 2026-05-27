@@ -20,7 +20,7 @@ export const Button = styled.button`
 `
 
 export const OutlineButton = styled(Button)`
-  background: black;
+  background: wheat;
   border: 1px solid black;
   color: black;
   &:hover{
