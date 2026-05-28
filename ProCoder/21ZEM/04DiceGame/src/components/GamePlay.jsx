@@ -3,6 +3,8 @@ import TotalScore from './TotalScore'
 import NumberSelector from './NumberSelector'
 import styled from 'styled-components'
 import RollDice from './RollDice'
+import { Button, OutlineButton } from '../styled/Button'
+import Rules from './Rules'
 
 const GamePlay = () => {
 
@@ -10,6 +12,7 @@ const GamePlay = () => {
     const [currentDice, setCurrentDice] = useState(1);
     const [selectedNumber, setSelectedNumber] = useState(1);
     const [error, setError] = useState("");
+    const [visible, setVisible] = useState(false);
 
     const rollDice = () => {
 
@@ -33,6 +36,11 @@ const GamePlay = () => {
 
     }
 
+    const reset = () => {
+      setScore(0);
+    }
+
+
 
   return (
     <GameContainer>
@@ -41,6 +49,11 @@ const GamePlay = () => {
         <NumberSelector error={error} setError={setError} selectedNumber={selectedNumber} setSelectedNumber={setSelectedNumber} />
       </div>
       <RollDice currentDice={currentDice} rollDice={rollDice}/>
+      <div className="btns">
+        <OutlineButton onClick={()=>(reset())} >Reset</OutlineButton>
+        <Button onClick={()=>setVisible((prev)=>!prev)}>{visible ? "Hide" : "Show"} rules</Button>
+      </div>
+      {visible && <Rules/>}
     </GameContainer>
   )
 }
@@ -55,5 +68,11 @@ const GameContainer = styled.div`
         display: flex;
         justify-content: space-around;
         align-items: end;
+    }
+    .btns{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
     }
 `
