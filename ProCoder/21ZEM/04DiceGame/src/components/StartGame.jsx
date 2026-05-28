@@ -1,53 +1,52 @@
 import React from 'react'
 
-import styled from 'styled-components'
+import styled from "styled-components"
 
 const StartGame = ({toggle}) => {
   return (
-    <Container>
+    <StartGameContainer>
         <div>
-            <img src="/images/dices.png" alt="" />
+            <img src="images/dices.png" alt="" />
         </div>
         <div className='content'>
             <h1>DICE GAME</h1>
             <Button onClick={toggle}>Play Now</Button>
         </div>
-    </Container>
+      
+    </StartGameContainer>
   )
 }
 
 export default StartGame
 
-const Container = styled.div`
-    max-width: 1180px;
+const StartGameContainer = styled.div`
     display: flex;
+    max-width: 1180px;
     margin: 0 auto;
     align-items: center;
     height: 100vh;
-
     .content h1{
-        font-size: 96px;
+        font-size: 108px;
         white-space: nowrap;
     }
 `
-
 const Button = styled.button`
-    padding: 16px 18px;
-    min-width: 220px;
-    height: 64px;
-    background-color: black;
-    color: wheat;
-    border-radius: 5px;
-    border: none;
-    font-size: larger;
+    padding: 21px 26px;
     border: 1px solid transparent;
-    cursor: pointer;
-    transition: 0.3s background-color ease-out;
+    color: wheat;
+    font-size: x-large;
+    background: black;
+    min-width: 220px;
+    border-radius: 3px;
+    font-weight: 500;
+    font-family: cursive;
+    transition: 0.5s background ease-in;
 
     &:hover{
-        background-color: whitesmoke;
-        color: #df9408;
-        border: 1px solid black;
-        transition: 0.3s background-color ease-out;
+        background: whitesmoke;
+        color: #f4a209;
+        border: 2px double #f4a209 ;
+        text-decoration: underline;
+        transition: 0.5s background ease-in-out;
     }
 `

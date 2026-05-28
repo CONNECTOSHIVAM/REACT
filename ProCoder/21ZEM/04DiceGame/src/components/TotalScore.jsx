@@ -1,5 +1,4 @@
 import React from 'react'
-
 import styled from 'styled-components'
 
 const TotalScore = ({score}) => {
@@ -14,16 +13,17 @@ const TotalScore = ({score}) => {
 export default TotalScore
 
 const ScoreContainer = styled.div`
-     max-width: 250px;
-     text-align: center;
-  
+    display: flex;
+    flex-direction: column;
+    max-width: 220px;
+    text-align: center;
 
-     h1{
-        font-size: 105px;
+    h1{
+        font-size: 96px;
         line-height: 100px;
-     }
-     p{
+    }
+    p{
         font-size: 25px;
         font-weight: 500;
-     }
+    }
 `

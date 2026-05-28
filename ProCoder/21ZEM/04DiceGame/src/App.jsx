@@ -1,21 +1,16 @@
-import React from 'react'
-
-import { useState } from 'react'
+import React, { useState } from 'react'
 import StartGame from './components/StartGame'
-import PlayGame from './components/PlayGame';
+import GamePlay from './components/GamePlay';
 
 const App = () => {
+  const [gameStatus, setGameStatus] = useState(false);
 
-  const [isGameStarted, setIsGameStarted] = useState(false);
-
-  const toggleGamePlay = () => {
-    setIsGameStarted((prev) => !prev)
+  const gameToggle = () => {
+    setGameStatus((prev)=>!prev);
   }
-
-
   return (
     <div>
-      {isGameStarted ? <PlayGame/> : <StartGame toggle={toggleGamePlay}/>}
+      {gameStatus ? <GamePlay/> : <StartGame toggle={gameToggle}/>}
     </div>
   )
 }
