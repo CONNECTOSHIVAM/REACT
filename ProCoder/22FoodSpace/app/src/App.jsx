@@ -152,6 +152,11 @@ const TopContainer = styled.div`
       border-radius: 8px;
     }
   }
+
+  @media (0 < width < 600px) {
+    flex-direction: column;
+    height: 120px;
+  }
 `;
 
 const FilterContainer = styled.div`
