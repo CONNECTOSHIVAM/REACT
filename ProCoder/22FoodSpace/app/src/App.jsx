@@ -120,7 +120,7 @@ const App = () => {
         </FilterContainer>
       </Container>
 
-      <SearchResult data={filteredData} />
+      {/* <SearchResult data={filteredData} /> */}
     </>
   );
 };
@@ -148,7 +148,7 @@ const TopContainer = styled.div`
       border: 1px solid tomato;
       color: white;
       font-family: cursive;
-      font-size: x-large;
+      font-size:  large;
       border-radius: 8px;
     }
   }
