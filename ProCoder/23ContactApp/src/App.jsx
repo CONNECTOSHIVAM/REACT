@@ -13,6 +13,7 @@ import NotFoundContact from "./components/NotFoundContact";
 const App = () => {
   const [contacts, setContacts] = useState([]);
   const [allContacts, setAllContacts] = useState([]);
+  
 
   const [isOpen, onClose, onOpen] = useDisclouse();
 
