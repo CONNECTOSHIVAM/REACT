@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 import {collection, onSnapshot} from "firebase/firestore"
 import { db } from './config/firebase'
+import { ToastContainer, toast } from 'react-toastify';
 // react icons
 import { FiSearch } from "react-icons/fi"
 import { GoPlusCircle } from "react-icons/go"
@@ -9,19 +10,15 @@ import { GoPlusCircle } from "react-icons/go"
 import Modal from './components/Modal'
 import ContactCard from './components/ContactCard'
 import AddAndUpdateContact from './components/AddAndUpdateContact'
+import useDisclouse from './hooks/useDisclouse';
 
 const App = () => {
 
   const [contacts, setContacts] = useState([]);
-  const [isOpen, setOpen] = useState(false);
+  const [allContacts, setAllContacts] = useState([]);
 
-  const onOpen = () => {
-    setOpen(true);
-  }
-
-  const onClose = () => {
-    setOpen(false);
-  }
+  const [isOpen, onClose, onOpen] = useDisclouse()
+  
 
   useEffect(()=>{
 
@@ -38,6 +35,7 @@ const App = () => {
             }
           });
           setContacts(contactLists);
+          setAllContacts(contactLists);
           return contactLists
         })
       } catch (error) {
@@ -50,6 +48,19 @@ const App = () => {
 
   },[])
 
+  const filterContacts = (e) => {
+    const value = e.target.value.toLowerCase();
+
+    if(!value){
+      setContacts(allContacts);
+      return
+    }
+
+    const filteredContacts = allContacts.filter((contact) => contact.name.toLowerCase().includes(value));
+
+    setContacts(filterContacts);
+  }
+
 
   return (
     <div className='max-w-[700px] mx-auto px-4'>
@@ -57,7 +68,7 @@ const App = () => {
       <div className='flex justify-between gap-2'>
         <div className='relative flex flex-grow items-center'>
           <FiSearch className='absolute text-5xl ml-2 text-amber-300'/>
-          <input type="text" placeholder='search anyone to connect...' className='h-17 bg-amber-50 flex-grow border-none rounded-md text-amber-800 text-[23px] outline-2 outline-amber-200 pl-15'  />
+          <input onChange={filterContacts} type="text" placeholder='search anyone to connect...' className='h-17 bg-amber-50 flex-grow border-none rounded-md text-amber-800 text-[23px] outline-2 outline-amber-200 pl-15'  />
         </div>
         <GoPlusCircle onClick={onOpen} className='text-7xl text-amber-300 bg-amber-50 rounded-2xl opacity-80 cursor-pointer hover:opacity-100 transition-all duration-500 ease-in'/>
       </div>
@@ -70,8 +81,8 @@ const App = () => {
         }
       </div>
 
-    <AddAndUpdateContact isOpen={isOpen} onClose={onClose}/>
    
+   <ToastContainer position='bottom-center'/>
 
     </div>
   )
