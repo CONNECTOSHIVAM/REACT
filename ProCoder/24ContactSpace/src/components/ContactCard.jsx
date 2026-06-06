@@ -19,8 +19,8 @@ const ContactCard = ({ contact }) => {
             await deleteDoc(doc(db,"contacts",id));
             toast("Contact deleted sucessfully",{
                 style:{
-                    background: "#e1300d",
-                    color: "#cecdcd"
+                    background: "#9B0F06",
+                    color: "#F1E2D1"
                 }
             })
             

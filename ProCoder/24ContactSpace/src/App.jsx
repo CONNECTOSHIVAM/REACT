@@ -9,6 +9,7 @@ import Modal from './components/Modal'
 import AddAndUpdateContact from './components/AddAndUpdateContact'
 import ContactCard from './components/ContactCard'
 import { ToastContainer, toast } from 'react-toastify';
+import NotFoundContact from './components/NotFoundContact'
 
 const App = () => {
 
@@ -35,6 +36,22 @@ const App = () => {
   },[])
 
 
+  const filterContacts = (e) => {
+    const value = e.target.value.toLowerCase();
+
+    if(!value)
+    {
+      setContacts(allContacts);
+      return
+    }
+
+    const filteredContacts = allContacts.filter((contacts)=>(contacts.name.toLowerCase().includes(value)));
+
+    setContacts(filteredContacts);
+
+  }
+
+
 
   return (
     <div className='max-w-[710px] mx-auto px-4'>
@@ -43,16 +60,17 @@ const App = () => {
       <div className='flex justify-between gap-3'>
         <div className='relative flex flex-grow items-center'>
           <FiSearch className='absolute text-5xl text-amber-400 ml-2'/>
-          <input type="text" placeholder='search anyone to connect...' className='h-17 bg-amber-50 flex-grow border-none  rounded-md pl-17 text-[25px] text-amber-800 outline-2 outline-amber-400 shadow-2xl shadow-amber-100' />
+          <input onChange={filterContacts} type="text" placeholder='search anyone to connect...' className='h-17 bg-amber-50 flex-grow border-none  rounded-md pl-17 text-[25px] text-amber-800 outline-2 outline-amber-400 shadow-2xl shadow-amber-100' />
         </div>
         <GoPlusCircle onClick={onOpen} className='text-7xl text-amber-400 bg-amber-50 rounded-xl shadow-2xl shadow-amber-50 opacity-80 hover:opacity-100 transition-opacity ease-in-out duration-500 cursor-pointer'/>
       </div>
 
       <div className='flex flex-col gap-3 mt-9'>
         {
-          contacts.map((contact)=>(
+          contacts.length === 0 ? (<NotFoundContact/>):
+          (contacts.map((contact)=> (
             <ContactCard key={contact.id} contact={contact}/>
-          ))
+          )))
         }
       </div>
 

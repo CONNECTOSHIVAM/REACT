@@ -4,6 +4,15 @@ import { Field, Form, Formik } from 'formik'
 import { db } from '../config/firebase'
 import { updateDoc, addDoc, collection, doc } from 'firebase/firestore'
 import { toast } from 'react-toastify'
+import * as Yup from "yup"
+
+
+const contactSchemaValidation = Yup.object({
+    name: Yup.string().required("name is required"),
+    email: Yup.string()
+             .email("email is invalid ")
+             .required("email is required"),
+})
 
 const AddAndUpdateContact = ({isOpen, onClose, isUpdate, contact}) => {
 
@@ -48,6 +57,8 @@ const AddAndUpdateContact = ({isOpen, onClose, isUpdate, contact}) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
         <Formik
+        enableReinitialize
+        validationSchema={contactSchemaValidation}
         initialValues={
         {
            name:  contact?.name || "",
