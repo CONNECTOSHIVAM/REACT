@@ -1,121 +1,66 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import React, { useEffect, useState } from 'react'
+import Navbar from './components/Navbar'
+import { FiSearch } from 'react-icons/fi'
+import { GoPlusCircle } from 'react-icons/go'
+import { collection, onSnapshot } from 'firebase/firestore'
+import { db } from './config/firebase'
+import useDisclouse from './hooks/useDisclouse'
+import Modal from './components/Modal'
+import AddAndUpdateContact from './components/AddAndUpdateContact'
+import ContactCard from './components/ContactCard'
+import { ToastContainer, toast } from 'react-toastify';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+
+  const [isOpen, onClose, onOpen] = useDisclouse();
+
+  const [contacts, setContacts] = useState([]);
+  const [allContacts, setAllContacts] = useState([]);
+
+  useEffect(()=>{
+
+    const contactsRef = collection(db, "contacts");
+
+    const unsubscribe = onSnapshot(contactsRef, (snapshot) => {
+      const contactLists = snapshot.docs.map((doc)=>({
+        id: doc.id,
+        ...doc.data()
+
+      }));
+      setContacts(contactLists);
+      setAllContacts(contactLists);
+    })
+
+    return () => unsubscribe();
+  },[])
+
+
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className='max-w-[710px] mx-auto px-4'>
+      {/* <h1 className='bg-red-500 text-orange-300 h-12 text-center text-3xl'>radhe radhe</h1> */}
+      <Navbar/>
+      <div className='flex justify-between gap-3'>
+        <div className='relative flex flex-grow items-center'>
+          <FiSearch className='absolute text-5xl text-amber-400 ml-2'/>
+          <input type="text" placeholder='search anyone to connect...' className='h-17 bg-amber-50 flex-grow border-none  rounded-md pl-17 text-[25px] text-amber-800 outline-2 outline-amber-400 shadow-2xl shadow-amber-100' />
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+        <GoPlusCircle onClick={onOpen} className='text-7xl text-amber-400 bg-amber-50 rounded-xl shadow-2xl shadow-amber-50 opacity-80 hover:opacity-100 transition-opacity ease-in-out duration-500 cursor-pointer'/>
+      </div>
 
-      <div className="ticks"></div>
+      <div className='flex flex-col gap-3 mt-9'>
+        {
+          contacts.map((contact)=>(
+            <ContactCard key={contact.id} contact={contact}/>
+          ))
+        }
+      </div>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      <AddAndUpdateContact isOpen={isOpen} onClose={onClose}/>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+      <ToastContainer position='bottom-center'/>
+
+    </div>
   )
 }
 
