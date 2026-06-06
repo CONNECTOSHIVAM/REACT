@@ -3,6 +3,9 @@ import { createPortal } from 'react-dom'
 import { IoMdClose } from "react-icons/io"
 
 const Modal = ({isOpen, onClose, children}) => {
+
+  if(!isOpen) return null;
+
   return createPortal(
     <>
       {isOpen && (

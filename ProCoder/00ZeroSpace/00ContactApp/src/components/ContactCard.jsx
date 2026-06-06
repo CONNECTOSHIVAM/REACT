@@ -34,7 +34,7 @@ const ContactCard = ({contact}) => {
 
   return (
     <>
-      <div key={contact.id} className='bg-amber-50 flex justify-between items-center rounded-2xl shadow-xl p-4 transition-all duration-500 ease-in '>
+      <div className='bg-amber-50 flex justify-between items-center rounded-2xl shadow-xl p-4 transition-all duration-500 ease-in '>
                <div className='flex gap-2'>
                  <RiMapPinUserFill className='text-5xl text-amber-300 '/>
                  <div>

@@ -47,6 +47,7 @@ const AddAndUpdateContact = ({isOpen, onClose, contact, isUpdate}) => {
             onClose();
             
         } catch (error) {
+            console.log(error);
             
         }
     }
