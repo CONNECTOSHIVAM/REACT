@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
-import {collection, onSnapshot} from "firebase/firestore"
+import {collection, doc, onSnapshot} from "firebase/firestore"
 import { db } from './config/firebase'
 import { ToastContainer, toast } from 'react-toastify';
 // react icons
@@ -11,6 +11,7 @@ import Modal from './components/Modal'
 import ContactCard from './components/ContactCard'
 import AddAndUpdateContact from './components/AddAndUpdateContact'
 import useDisclouse from './hooks/useDisclouse';
+import NotFoundContact from './components/NotFoundContact';
 
 const App = () => {
 
@@ -22,30 +23,19 @@ const App = () => {
 
   useEffect(()=>{
 
-    const getContacts = async() => {
+    const contactsRef = collection(db, "contacts");
 
-      try {
-        const contactsRef = collection(db, "contacts");
-        
-        onSnapshot(contactsRef, (snapshot)=>{
-          const contactLists = snapshot.docs.map((doc)=>{
-            return{
-              id: doc.id,
-              ...doc.data(),
-            }
-          });
-          setContacts(contactLists);
-          setAllContacts(contactLists);
-          return contactLists
-        })
-      } catch (error) {
-        console.log(error);
-        
-      }
-    }
+    const unsubscribe = onSnapshot(contactsRef, (snapshot) => {
+      const contactLists = snapshot.docs.map((doc)=>({
+        id: doc.id,
+        ...doc.data(),
+      }));
 
-    getContacts();
+      setContacts(contactLists);
+      setAllContacts(contactLists);
+    })
 
+        return () => unsubscribe();
   },[])
 
   const filterContacts = (e) => {
@@ -58,7 +48,7 @@ const App = () => {
 
     const filteredContacts = allContacts.filter((contact) => contact.name.toLowerCase().includes(value));
 
-    setContacts(filterContacts);
+    setContacts(filteredContacts);
   }
 
 
@@ -75,11 +65,15 @@ const App = () => {
 
       <div className='mt-4 flex flex-col gap-3'>
         {
-          contacts.map((contact)=>(
+          contacts.length === 0 ? (
+          <NotFoundContact/> ) :
+          ( contacts.map((contact)=>(
             <ContactCard key={contact.id} contact={contact}/>
-          ))
+          )))
         }
       </div>
+
+    <AddAndUpdateContact isOpen={isOpen} onClose={onClose}/>
 
    
    <ToastContainer position='bottom-center'/>

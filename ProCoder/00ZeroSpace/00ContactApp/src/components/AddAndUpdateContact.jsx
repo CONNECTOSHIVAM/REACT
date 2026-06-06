@@ -1,9 +1,17 @@
 import React from 'react'
 import Modal from './Modal'
-import { Field, Form, Formik } from 'formik'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
 import { addDoc, collection, doc, updateDoc } from 'firebase/firestore'
 import { db } from '../config/firebase'
 import { toast } from 'react-toastify'
+import * as Yup from "yup"
+
+const contactSchemaValidation = Yup.object({
+    name: Yup.string().required("name is required"),
+    email: Yup.string()
+              .email("invalid email")
+              .required("email is required."),
+});
 
 const AddAndUpdateContact = ({isOpen, onClose, contact, isUpdate}) => {
 
@@ -48,6 +56,7 @@ const AddAndUpdateContact = ({isOpen, onClose, contact, isUpdate}) => {
     <>
       <Modal isOpen={isOpen} onClose={onClose} >
         <Formik
+         validationSchema={contactSchemaValidation}
          initialValues={
             isUpdate?
             {
@@ -75,10 +84,16 @@ const AddAndUpdateContact = ({isOpen, onClose, contact, isUpdate}) => {
                 <div className='flex flex-col gap-2 p-4'>
                     <label htmlFor="name">Name</label>
                     <Field name="name" className="border border-amber-700 h-10 rounded-sm p-3 text-amber-600" />
+                    <div className='text-red-500 text-sm'>
+                        <ErrorMessage name='name'/>
+                    </div>
                 </div>
                 <div className='flex flex-col gap-2 p-4'>
                     <label htmlFor="email">Email</label>
                     <Field type="email" name="email" className="border border-amber-700 h-10 rounded-sm p-3 text-amber-600" />
+                    <div className='text-red-500 text-sm'>
+                        <ErrorMessage name='email'/>
+                    </div>
                 </div>
                 <button className='self-end px-3 bg-amber-800 px-5 py-3 font-medium text-amber-50 opacity-80 transition-opacity duration-500 ease-in-out hover:opacity-95 cursor-pointer rounded-xl mr-6 mb-6'>{isUpdate ? "Update " : "Add "} Contact</button>
             </Form>
