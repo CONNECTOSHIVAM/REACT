@@ -1,11 +1,11 @@
-import React from 'react'
-
-const AddAndUpdateTodo = () => {
+import React from "react";
+import Modal from "./Modal";
+const AddAndUpdateTodo = ({showModal, onClose}) => {
   return (
-    <div>
-      
-    </div>
-  )
-}
+  <Modal showModal={showModal} onClose={onClose}>
+    
+  </Modal>
+  );
+};
 
-export default AddAndUpdateTodo
+export default AddAndUpdateTodo;

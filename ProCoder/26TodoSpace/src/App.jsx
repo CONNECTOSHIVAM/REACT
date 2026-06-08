@@ -8,6 +8,8 @@ import { db } from './config/firebase';
 import { collection, onSnapshot } from 'firebase/firestore'
 import NotFoundTodo from './components/NotFoundTodo';
 import TodoCard from './components/TodoCard';
+import Modal from './components/Modal';
+import AddAndUpdateTodo from './components/AddAndUpdateTodo';
 
 
 
@@ -32,6 +34,15 @@ const App = () => {
     return unsubscribe;
   },[])
 
+  const onClose = () => {
+    setShowModal(false)
+  }
+
+  const onOpen = () => {
+
+    setShowModal(true)
+  }
+
 
 
   return (
@@ -41,9 +52,9 @@ const App = () => {
         <div className='flex justify-between gap-4'>
           <div className='flex flex-grow relative items-center'>
             <FiSearch className='absolute text-5xl text-amber-400 ml-2'/>
-            <input type="text" placeholder='look your todos...' className='h-16 p-3 flex-grow rounded-sm border-none outline-2 outline-amber-500 text-[21px] pl-16 text-amber-600 bg-amber-50 shadow-2xl shadow-amber-100' />
+            <input type="text" placeholder='look your todos...' className='h-16 p-3 flex-grow rounded-sm border-none outline-2 outline-amber-500 text-[21px] pl-16 text-amber-600  shadow-2xl shadow-amber-100' />
           </div>
-          <GoPlusCircle className='text-7xl text-amber-400 bg-amber-100 rounded-2xl opacity-70 transition-opacity ease-in duration-500 hover:opacity-100 cursor-pointer'/>
+          <GoPlusCircle onClick={onOpen} className='text-7xl text-amber-400 bg-amber-100 rounded-2xl opacity-70 transition-opacity ease-in duration-500 hover:opacity-100 cursor-pointer'/>
         </div>
         <div className='flex justify-between shadow-2xl shadow-amber-200'>
             <div className='flex items-center justify-center gap-2 w-[50%] bg-amber-50 h-12 outline-2 outline-amber-300 cursor-pointer opacity-70 box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset; transition-opacity ease-in-out duration-500 hover:opacity-95'>
@@ -65,6 +76,9 @@ const App = () => {
           )))
         }
       </div>
+
+
+      <AddAndUpdateTodo showModal={showModal} onClose={onClose}/>
 
 
 
