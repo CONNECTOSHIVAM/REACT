@@ -4,7 +4,7 @@ import { RiDeleteBin4Fill } from "react-icons/ri";
 import { IoShieldCheckmarkOutline } from "react-icons/io5";
 import AddAndUpdateTodo from "./AddAndUpdateTodo";
 import useDisclouse from "../hooks/useDisclouse";
-import { deleteDoc, doc } from "firebase/firestore";
+import { deleteDoc, doc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { toast } from "react-toastify";
 
@@ -25,6 +25,17 @@ const TodoCard = ({ todo }) => {
       console.log(error);
     }
   };
+
+  const completeTodo = async (id) => {
+    try {
+      await updateDoc(doc(db, "todos", id),{
+      status: "completed",
+      completedAt: serverTimestamp()
+    })
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -47,7 +58,7 @@ const TodoCard = ({ todo }) => {
             onClick={onOpen}
             className="text-amber-400 opacity-70 transition-opacity ease-in-out duration-500 text-[46px]  hover:opacity-100 cursor-pointer active:text-amber-800"
           />
-          <IoShieldCheckmarkOutline className="text-amber-400 opacity-70 transition-opacity ease-in-out duration-500 hover:opacity-100 cursor-pointer active:text-green-900" />
+          <IoShieldCheckmarkOutline onClick={()=>(completeTodo(todo.id))} className="text-amber-400 opacity-70 transition-opacity ease-in-out duration-500 hover:opacity-100 cursor-pointer active:text-green-900" />
           <RiDeleteBin4Fill
             onClick={()=>(deleteTodo(todo.id))}
             className="text-amber-800 opacity-70 transition-opacity ease-in-out duration-500 hover:opacity-100 cursor-pointer active:text-red-900"
