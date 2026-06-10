@@ -10,6 +10,9 @@ import NotFoundTodo from './components/NotFoundTodo';
 import TodoCard from './components/TodoCard';
 import Modal from './components/Modal';
 import AddAndUpdateTodo from './components/AddAndUpdateTodo';
+import { ToastContainer, toast } from 'react-toastify';
+import useDisclouse from './hooks/useDisclouse';
+
 
 
 
@@ -17,7 +20,7 @@ const App = () => {
 
   const [todos, setTodos] = useState([]);
   const [search, setSearch] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, onClose, onOpen] = useDisclouse();
   const [selectedTodo, setSelectedTodo] = useState(null);
   const [tab, setTab] = useState("todo");
 
@@ -33,15 +36,6 @@ const App = () => {
 
     return unsubscribe;
   },[])
-
-  const onClose = () => {
-    setShowModal(false)
-  }
-
-  const onOpen = () => {
-
-    setShowModal(true)
-  }
 
 
 
@@ -72,13 +66,15 @@ const App = () => {
         {
           todos.length === 0 ? (<NotFoundTodo/>) :
           (todos.map((todo)=> (
-               <TodoCard key={todo.id} todo={todo}/>
+               <TodoCard key={todo.id} todo={todo} />
           )))
         }
       </div>
 
 
       <AddAndUpdateTodo showModal={showModal} onClose={onClose}/>
+
+      <ToastContainer position='bottom-center'/>
 
 
 
