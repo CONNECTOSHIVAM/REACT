@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "./Modal";
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import {
   addDoc,
   collection,
@@ -10,6 +10,12 @@ import {
 } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { toast } from "react-toastify";
+import * as Yup from "yup";
+
+const contactSchemaValidation = Yup.object({
+  title: Yup.string().required("Title is required."),
+})
+
 const AddAndUpdateTodo = ({ showModal, onClose, isUpdate, todo }) => {
   const addTodo = async (todo) => {
     try {
@@ -56,6 +62,7 @@ const AddAndUpdateTodo = ({ showModal, onClose, isUpdate, todo }) => {
     <Modal showModal={showModal} onClose={onClose}>
       <Formik
         enableReinitialize
+        validationSchema={contactSchemaValidation}
         initialValues={{
           title: todo?.title || "",
           description: todo?.description || "",
@@ -81,6 +88,9 @@ const AddAndUpdateTodo = ({ showModal, onClose, isUpdate, todo }) => {
               placeholder="drop karo todo wala title..."
               className="h-12 font-medium outline-2 outline-amber-600 rounded-sm p-4 text-amber-600"
             />
+            <div className="text-red-600 text-sm">
+              <ErrorMessage name="title"/>
+            </div>
           </div>
           <div className="flex flex-col gap-4 p-4">
             <label htmlFor="description" className="font-medium text-amber-700">
