@@ -352,7 +352,7 @@ VITE_FIREBASE_APP_ID=
 
 ---
 
-# 🚀 Installation
+
 
 ### Clone Repository
 
