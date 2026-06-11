@@ -1,68 +1,126 @@
 import { useState } from "react";
-import {
-  addDoc,
-  collection,
-  updateDoc,
-  doc,
-  serverTimestamp,
-} from "firebase/firestore";
-import { db } from "../config/firebase";
+import Modal from "./Modal";
 
-const AddUpdateTodo = ({ todo, onClose }) => {
-  const [title, setTitle] = useState(todo?.title || "");
-  const [description, setDescription] = useState(
-    todo?.description || ""
-  );
+import { ErrorMessage, Field, Form, Formik } from "formik";
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+import { toast } from "react-toastify";
 
-    if (todo) {
-      await updateDoc(doc(db, "todos", todo.id), {
-        title,
-        description,
-      });
-    } else {
-      await addDoc(collection(db, "todos"), {
-        title,
-        description,
-        status: "todo",
-        createdAt: serverTimestamp(),
-        completedAt: null,
-      });
+import { todoSchema } from "../schemas/todoSchema";
+
+import { createTodo, updateTodoById } from "../services/todoService";
+
+const AddAndUpdateTodo = ({ showModal, onClose, isUpdate = false, todo }) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (values, { resetForm }) => {
+    try {
+      setLoading(true);
+
+      if (isUpdate) {
+        await updateTodoById(todo.id, values);
+
+        toast.success("Todo updated successfully ✨");
+      } else {
+        await createTodo(values);
+
+        toast.success("Todo created successfully 🎉");
+      }
+
+      resetForm();
+
+      onClose();
+    } catch (error) {
+      console.error(error);
+
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
-
-    onClose();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2 className="text-xl font-bold mb-3">
-        {todo ? "Update Todo" : "Add Todo"}
-      </h2>
-
-      <input
-        type="text"
-        placeholder="Title"
-        className="border p-2 w-full mb-3"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-
-      <textarea
-        placeholder="Description"
-        className="border p-2 w-full mb-3"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-
-      <button
-        className="bg-green-600 text-white px-4 py-2 rounded"
+    <Modal showModal={showModal} onClose={onClose}>
+      <Formik
+        enableReinitialize
+        initialValues={{
+          title: todo?.title || "",
+          description: todo?.description || "",
+        }}
+        validationSchema={todoSchema}
+        onSubmit={handleSubmit}
       >
-        Save
-      </button>
-    </form>
+        {({ values }) => (
+          <Form className="pb-6">
+            {/* Title */}
+            <div className="px-6">
+              <label
+                htmlFor="title"
+                className="block text-lg font-semibold text-amber-800 mb-2"
+              >
+                Title
+              </label>
+
+              <Field
+                name="title"
+                placeholder="Enter todo title..."
+                className="w-full rounded-xl border border-amber-300 px-4 py-3 outline-none focus:ring-2 focus:ring-amber-400"
+              />
+
+              <div className="mt-1 text-sm text-red-500">
+                <ErrorMessage name="title" />
+              </div>
+            </div>
+
+            {/* Description */}
+            <div className="px-6 mt-5">
+              <label
+                htmlFor="description"
+                className="block text-lg font-semibold text-amber-800 mb-2"
+              >
+                Description
+              </label>
+
+              <Field
+                as="textarea"
+                rows="4"
+                name="description"
+                placeholder="Enter description..."
+                className="w-full resize-none rounded-xl border border-amber-300 px-4 py-3 outline-none focus:ring-2 focus:ring-amber-400"
+              />
+
+              <div className="flex justify-between mt-1">
+                <div className="text-sm text-red-500">
+                  <ErrorMessage name="description" />
+                </div>
+
+                <span className="text-xs text-gray-400">
+                  {values.description.length}
+                  /300
+                </span>
+              </div>
+            </div>
+
+            {/* Submit */}
+            <div className="flex justify-end px-6 mt-8">
+              <button
+                type="submit"
+                disabled={loading}
+                className="rounded-xl bg-amber-900 px-6 py-3 text-white font-medium hover:bg-amber-800 transition disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {loading
+                  ? isUpdate
+                    ? "Updating..."
+                    : "Creating..."
+                  : isUpdate
+                    ? "Update Todo"
+                    : "Add Todo"}
+              </button>
+            </div>
+          </Form>
+        )}
+      </Formik>
+    </Modal>
   );
 };
 
-export default AddUpdateTodo;
+export default AddAndUpdateTodo;

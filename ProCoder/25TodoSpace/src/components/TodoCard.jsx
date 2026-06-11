@@ -1,62 +1,138 @@
-import {
-  deleteDoc,
-  doc,
-  updateDoc,
-  serverTimestamp,
-} from "firebase/firestore";
-import { db } from "../config/firebase";
+import React, { useState } from "react";
+import { MdOutlineTipsAndUpdates } from "react-icons/md";
+import { RiDeleteBin4Fill } from "react-icons/ri";
+import { IoShieldCheckmarkOutline } from "react-icons/io5";
+import { toast } from "react-toastify";
 
-const TodoCard = ({ todo, onEdit }) => {
-  const deleteTodo = async () => {
-    await deleteDoc(doc(db, "todos", todo.id));
+import AddAndUpdateTodo from "./AddUpdateTodo";
+import useDisclosure from "../hooks/useDisclosure";
+
+import { deleteTodoById, completeTodoById } from "../services/todoService";
+
+const TodoCard = ({ todo }) => {
+  const { isOpen, open, close } = useDisclosure();
+
+  const [actionLoading, setActionLoading] = useState(false);
+
+  const handleDelete = async () => {
+    const confirmed = window.confirm(`Delete "${todo.title}" ?`);
+
+    if (!confirmed) return;
+
+    try {
+      setActionLoading(true);
+
+      await deleteTodoById(todo.id);
+
+      toast.success("Todo deleted successfully");
+    } catch (error) {
+      console.error(error);
+
+      toast.error("Failed to delete todo. Please try again.");
+    } finally {
+      setActionLoading(false);
+    }
   };
 
-  const completeTodo = async () => {
-    await updateDoc(doc(db, "todos", todo.id), {
-      status: "completed",
-      completedAt: serverTimestamp(),
-    });
+  const handleComplete = async () => {
+    if (todo.status === "completed") return;
+
+    try {
+      setActionLoading(true);
+
+      await completeTodoById(todo.id);
+
+      toast.success("Todo marked as completed 🎉");
+    } catch (error) {
+      console.error(error);
+
+      toast.error("Failed to complete todo.");
+    } finally {
+      setActionLoading(false);
+    }
   };
 
   return (
-    <div className="border p-4 rounded mb-3 shadow">
-      <h2 className="font-bold">{todo.title}</h2>
+    <>
+      <div className="mt-5 rounded-2xl border border-amber-200 bg-white p-5 shadow-sm hover:shadow-md transition-all duration-300">
+        <div className="flex flex-col md:flex-row md:justify-between gap-5">
+          {/* Content */}
+          <div className="flex-1">
+            <div className="flex items-center gap-2">
+              <h2 className="text-xl font-bold text-amber-900 break-words">
+                {todo.title}
+              </h2>
 
-      <p>{todo.description}</p>
+              {todo.status === "completed" && (
+                <span className="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-700">
+                  Completed
+                </span>
+              )}
+            </div>
 
-      <div className="flex gap-2 mt-3">
-        {todo.status === "todo" && (
-          <>
+            {todo.description && (
+              <p className="mt-3 text-amber-700 break-words">
+                {todo.description}
+              </p>
+            )}
+
+            <div className="mt-4 space-y-1 text-sm text-gray-500">
+              <p>📅 Created: {todo.createdAt?.toDate?.().toLocaleString()}</p>
+
+              {todo.completedAt && (
+                <p>
+                  ✅ Completed: {todo.completedAt?.toDate?.().toLocaleString()}
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* Actions */}
+          <div className="flex md:flex-col justify-end gap-4 text-3xl">
+            {/* Update */}
             <button
-              onClick={() => onEdit(todo)}
-              className="bg-blue-500 text-white px-3 py-1 rounded"
+              onClick={open}
+              disabled={actionLoading}
+              title="Update Todo"
+              className="text-amber-500 hover:text-amber-700 transition disabled:opacity-50"
             >
-              Edit
+              <MdOutlineTipsAndUpdates />
             </button>
 
+            {/* Complete */}
             <button
-              onClick={completeTodo}
-              className="bg-green-500 text-white px-3 py-1 rounded"
+              onClick={handleComplete}
+              disabled={actionLoading || todo.status === "completed"}
+              title="Mark Completed"
+              className={`transition ${
+                todo.status === "completed"
+                  ? "text-green-600 cursor-not-allowed opacity-70"
+                  : "text-amber-500 hover:text-green-600"
+              }`}
             >
-              Complete
+              <IoShieldCheckmarkOutline />
             </button>
-          </>
-        )}
 
-        <button
-          onClick={deleteTodo}
-          className="bg-red-500 text-white px-3 py-1 rounded"
-        >
-          Delete
-        </button>
+            {/* Delete */}
+            <button
+              onClick={handleDelete}
+              disabled={actionLoading}
+              title="Delete Todo"
+              className="text-amber-800 hover:text-red-600 transition disabled:opacity-50"
+            >
+              <RiDeleteBin4Fill />
+            </button>
+          </div>
+        </div>
       </div>
 
-      {todo.completedAt && (
-        <p className="text-sm text-green-700 mt-2">
-          Completed
-        </p>
-      )}
-    </div>
+      <AddAndUpdateTodo
+        showModal={isOpen}
+        onClose={close}
+        isUpdate
+        todo={todo}
+      />
+    </>
   );
 };
 
