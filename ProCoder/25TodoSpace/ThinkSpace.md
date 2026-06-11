@@ -353,33 +353,6 @@ VITE_FIREBASE_APP_ID=
 ---
 
 
-
-### Clone Repository
-
-```bash
-git clone https://github.com/yourusername/todospace.git
-```
-
-### Move Into Project
-
-```bash
-cd todospace
-```
-
-### Install Dependencies
-
-```bash
-npm install
-```
-
-### Start Development Server
-
-```bash
-npm run dev
-```
-
----
-
 # 🎯 Learning Outcomes
 
 This project demonstrates:
