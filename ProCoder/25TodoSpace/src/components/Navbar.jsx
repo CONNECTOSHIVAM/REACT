@@ -4,7 +4,7 @@ import { RiCheckboxCircleFill } from "react-icons/ri";
 
 const Navbar = ({ totalTodos = 0 }) => {
   return (
-    <header className="sticky top-0 z-40 my-4">
+    <header className="sticky top-2 z-40 my-4">
       <div className="flex items-center justify-between rounded-2xl border border-amber-200 bg-gradient-to-r from-[#F8F5EF] to-[#F1E8D8] px-5 py-4 shadow-sm backdrop-blur-sm">
         {/* Logo Section */}
         <div className="flex items-center gap-3">

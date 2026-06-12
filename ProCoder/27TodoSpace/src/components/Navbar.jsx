@@ -1,10 +1,32 @@
 import React from 'react'
+import { RiCheckboxCircleFill } from 'react-icons/ri'
+import { SiTodoist } from 'react-icons/si'
 
-const Navbar = () => {
+const Navbar = ({totalTodos = 0}) => {
   return (
-    <div>
-      
-    </div>
+    <header className='sticky top-3 z-40 my-4'>
+      <div className='flex items-center justify-between rounded-2xl border border-amber-200 bg-gradient-to-r from-[#F8F5FE] to-[#F1E8D8] px-5 py-4 shadow-sm backdrop-blur-sm'>
+             {/* Logo sections */}
+             <div className='flex items-center gap-3 '>
+                 <div className='flex justify-center items-center h-12 w-12 rounded-xl bg-amber-100'>
+                   <SiTodoist className='text-2xl text-amber-700'/>
+                 </div>
+                 <div>
+                  <h1 className='text-xl font-bold text-amber-900'>TodoSpace</h1>
+                  <p className='text-xs text-amber-600'>Organize your day efficiently</p>
+                 </div>
+             </div>
+
+             {/* status sections */}
+             <div className='flex bg-white gap-2 items-center px-4 py-2 shadow-sm border border-amber-100 rounded-xl'>
+              <RiCheckboxCircleFill className='text-lg text-green-600'/>
+              <div className='flex flex-col'>
+                <span className='text-sm font-semibold text-amber-900'>{totalTodos}</span>
+                <span className='text-[11px] text-gray-500'>Total Tasks</span>
+              </div>
+             </div>
+      </div>
+    </header>
   )
 }
 

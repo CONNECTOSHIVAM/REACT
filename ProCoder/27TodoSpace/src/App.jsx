@@ -4,6 +4,7 @@ import useTodos from './hooks/useTodos';
 import useDisclosure from './hooks/useDisclosure';
 import { collection } from 'firebase/firestore';
 import { db } from './config/firebase';
+import Navbar from './components/Navbar';
 
 
 
@@ -18,21 +19,14 @@ const App = () => {
 
 
 
-  const filteredTodos = useMemo(()=>{
-
-    const searchTerm = search.trim().toLowerCase();
-
-    return todos.filter(
-      (todo) => 
-        todo.status === tab &&   tab.title.toLowerCase().includes(searchTerm)
-    );
-  },[todos, tab, search])
+  
   
 
 
   return (
     <div>
-      <h1 className='bg-amber-100 h-21 text-5xl text-center'>radhe radhe</h1>
+      {/* <h1 className='bg-amber-100 h-21 text-5xl text-center'>radhe radhe</h1> */}
+      <Navbar/>
     </div>
   )
 }
