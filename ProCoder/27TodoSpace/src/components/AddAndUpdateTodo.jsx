@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const AddAndUpdateTodo = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  return <div></div>;
+};
 
-export default AddAndUpdateTodo
+export default AddAndUpdateTodo;

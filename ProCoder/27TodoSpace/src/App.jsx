@@ -9,6 +9,9 @@ import { FiSearch } from 'react-icons/fi';
 import { GoPlusCircle } from 'react-icons/go';
 import { RiTodoLine } from 'react-icons/ri';
 import { LuListTodo } from 'react-icons/lu';
+import NotFoundTodo from './components/NotFoundTodo';
+import TodoCard from './components/TodoCard';
+import AddAndUpdateTodo from './components/AddAndUpdateTodo';
 
 
 
@@ -39,9 +42,11 @@ const App = () => {
 
     const searchTerm = search.trim().toLowerCase();
 
-    return todos.filter((todo)=>{
-      todo.status === tab && todo.title.toLowerCase().includes(searchTerm);
-    });
+    return todos.filter(
+      (todo) =>
+         todo.status === tab && 
+         todo.title.toLowerCase().includes(searchTerm)
+    );
   },[todos, tab, search])
 
 
@@ -117,6 +122,25 @@ const App = () => {
        </p>
 
      </section>
+
+    {/* Todo List */}
+    <section>
+      {loading ? (
+         <div className='flex justify-center py-20'>
+           <div className='h-10 w-10 animate-spin rounded-full border-4 border-amber-300 border-t-amber-700'></div>
+         </div>
+      ): filteredTodos.length === 0 ? (
+        <NotFoundTodo/>
+      ):(
+        filteredTodos.map((todo)=>(
+          <TodoCard key={todo.id} todo={todo}/>
+        ))
+      )
+    }
+    </section>
+
+    {/* Add todo modal */}
+    <AddAndUpdateTodo showModal={isOpen} onClose={onClose}/>
 
 
 
