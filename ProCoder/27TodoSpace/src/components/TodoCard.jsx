@@ -80,17 +80,19 @@ const TodoCard = ({todo}) => {
       <div className="flex md:flex-col justify-end gap-4 text-3xl" >
         {/* Update */}
          <button
+          onClick={onOpen}
+          disabled={actionLoading}
           title="Update Todo"
           className="text-amber-500 hover:text-amber-700 transition disabled:opacity-50"
          >
           <MdOutlineTipsAndUpdates/>
          </button>
          {/* Complete */}
-         <button title="Mark Completed" className={`transition ${ todo.status === "completed" ? "text-green-600 cursor-not-allowed opacity-70" : "text-amber-500 hover:text-green-600"}`}>
+         <button onClick={handleComplete} disabled={actionLoading || todo.status === "completed"} title="Mark Completed" className={`transition ${ todo.status === "completed" ? "text-green-600 cursor-not-allowed opacity-70" : "text-amber-500 hover:text-green-600"}`}>
           <IoShieldCheckmarkOutline/>
          </button>
          {/* Delete */}
-         <button title="Delete Todo" className="text-amber-800 hover:text-red-600 transition disabled:opacity-50">
+         <button onClick={handleDelete} disabled={actionLoading} title="Delete Todo" className="text-amber-800 hover:text-red-600 transition disabled:opacity-50">
           <RiDeleteBin4Fill/>
          </button>
       </div>
