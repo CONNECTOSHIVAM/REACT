@@ -12,6 +12,7 @@ import { LuListTodo } from 'react-icons/lu';
 import NotFoundTodo from './components/NotFoundTodo';
 import TodoCard from './components/TodoCard';
 import AddAndUpdateTodo from './components/AddAndUpdateTodo';
+import Modal from './components/Modal';
 
 
 
@@ -138,6 +139,8 @@ const App = () => {
       )
     }
     </section>
+
+    <Modal showModal={isOpen} onClose={onClose}>fadsfa</Modal>
 
     {/* Add todo modal */}
     <AddAndUpdateTodo showModal={isOpen} onClose={onClose}/>
