@@ -4,10 +4,25 @@ import { IoMdClose } from "react-icons/io";
 
 const Modal = ({ showModal, onClose, children }) => {
 
-  useEffect(()=>{
-    if(!showModal) return;
+  useEffect(() => {
+    if (!showModal) return;
 
-  })
+    const handleEscape = (e) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+
+    window.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.body.style.overflow = "auto";
+
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [showModal, onClose]);
 
 
   if (!showModal) return null;

@@ -10,7 +10,7 @@ import AddAndUpdateTodo from "./AddAndUpdateTodo";
 const TodoCard = ({todo}) => {
 
   const {isOpen, onClose, onOpen} = useDisclosure();
-  const {actionLoading, setActionLoading} = useState(false);
+  const [actionLoading, setActionLoading] = useState(false);
 
   const handleDelete = async () => {
 
