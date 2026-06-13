@@ -144,6 +144,12 @@ const App = () => {
 
 
 
+    <ToastContainer
+     position='bottom-center'
+     autoClose={2500}
+     theme='light'
+    />
+
 
     </div>
   )
