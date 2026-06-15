@@ -82,7 +82,7 @@ const AddAndUpdateTodo = ({showModal, onClose, isUpdate=false , todo}) => {
 
            {/* Submit */}
            <div className="flex justify-end px-6 mt-8">
-            <button type="submit" disabled={loading} className="rounded-xl z-10 bg-amber-700 px-6 py-3 text-amber-500 font-medium hover:bg-amber-900 transition disabled:opacity-60 disabled:cursor-not-allowed">
+            <button type="submit" disabled={loading} className="rounded-xl z-10 bg-amber-900 px-6 py-3 text-amber-50 font-medium opacity-85 hover:opacity-100 transition disabled:opacity-60 disabled:cursor-not-allowed">
               {loading ? isUpdate ? "Updating..." : "Creating..." :isUpdate ? "Update Todo" : "Add Todo"}
             </button>
            </div>

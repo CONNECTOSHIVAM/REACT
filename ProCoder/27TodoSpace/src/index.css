@@ -103,7 +103,7 @@ textarea:-webkit-autofill {
 button {
   border: none;
   outline: none;
-  background: transparent;
+  /* background: transparent; */
   cursor: pointer;
   font: inherit;
 }
