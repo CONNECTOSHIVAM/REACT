@@ -1,14 +1,4 @@
-# 🧠 Elite Developer Thinking Process
-
-Before writing code, design the system.
-
-Most beginners start by creating components and writing code immediately.
-
-Elite developers start with understanding the problem, designing the data, defining the state flow, and creating the architecture first.
-
----
-
-# Problem → Architecture → Code
+#🧠  Problem → Architecture → Code
 
 ```text
                    Problem
@@ -468,8 +458,13 @@ Add Validation
 Polish UI & UX
 
 ---
+# 👨‍💻 Author
 
-# Elite Developer Checklist
+**Shivam Kumar**
+
+[![GitHub](https://img.shields.io/badge/GitHub-connectoshivam-181717?style=for-the-badge&logo=github)](https://github.com/connectoshivam)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-connectoshivam-0A66C2?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/connectoshivam)
+[![Twitter](https://img.shields.io/badge/Twitter-connectoshivam-f6b355?style=for-the-badge&logo=x)](https://twitter.com/connectoshivam)
 
 Before writing code, answer these questions:
 
