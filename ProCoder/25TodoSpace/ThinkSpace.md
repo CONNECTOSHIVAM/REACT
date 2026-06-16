@@ -1,97 +1,290 @@
-# 🚀 TodoSpace
-
-A modern and responsive Todo Management Application built with **React**, **Firebase Firestore**, **Formik**, **Yup**, and **Tailwind CSS**.
-
-TodoSpace helps users organize their daily tasks with real-time synchronization, task completion tracking, search functionality, and a clean user experience.
-
----
-
-## 📸 Preview
+# 🧠  Problem → Architecture → Code
 
 ```text
-┌──────────────────────────────────────┐
-│               TodoSpace              │
-├──────────────────────────────────────┤
-│ 🔍 Search Todos...           ➕ Add  │
-├──────────────────────────────────────┤
-│ [ Todos ]     [ Completed ]          │
-├──────────────────────────────────────┤
-│ Learn React          ✏️  ✅  🗑️      │
-│ Build Todo App with Firebase         │
-├──────────────────────────────────────┤
-│ Learn Firestore      ✏️  ✅  🗑️      │
-│ Practice CRUD Operations             │
-└──────────────────────────────────────┘
+                   Problem
+                      ↓
+                Business Rules
+                      ↓
+                  Data Model
+                      ↓
+               State Machine
+                      ↓
+                User Journey
+                      ↓
+               User Actions
+                      ↓
+                State Design
+                      ↓
+                 Data Flow
+                      ↓
+              System Architecture
+                      ↓
+             Component Boundaries
+                      ↓
+                   UI Design
+                      ↓
+              Implementation
 ```
 
 ---
 
-# ✨ Features
+# 1. Understand The Problem
 
-### Todo Management
+## System
 
-* ✅ Create Todo
-* ✏️ Update Todo
-* 🗑️ Delete Todo
-* ✔️ Mark Todo as Completed
-* 🔍 Search Todos
-* 📋 View Todos
-* 🎯 Filter Todos by Status
+Firebase Todo App
 
-### User Experience
+## Goal
 
-* Real-time updates using Firestore
-* Responsive design
-* Modal-based forms
-* Form validation using Yup
-* Success & error notifications
-* Loading states
-* Modern UI with Tailwind CSS
+Allow users to manage tasks efficiently.
 
----
+### Features
 
-# 🛠️ Tech Stack
+* Create Todo
+* Read Todos
+* Update Todo
+* Delete Todo
+* Search Todo
+* Complete Todo
+* Filter Todo
 
-### Frontend
+### CRUD Mapping
 
-* React
-* Vite
-* Tailwind CSS
-
-### Backend & Database
-
-* Firebase Firestore
-
-### Form Handling
-
-* Formik
-* Yup
-
-### Notifications
-
-* React Toastify
-
-### Icons
-
-* React Icons
+| Operation | Feature     |
+| --------- | ----------- |
+| Create    | Add Todo    |
+| Read      | View Todos  |
+| Update    | Edit Todo   |
+| Delete    | Delete Todo |
 
 ---
 
-# 📂 Project Structure
+# 2. Define Business Rules
+
+Before coding, define how the system behaves.
+
+### Rules
+
+* A todo can only be in one state.
+* Every todo must contain required information.
+* Completed todos must store completion time.
+
+### States
+
+```text
+todo
+completed
+```
+
+### State Rule
+
+```text
+If status = completed
+→ completedAt must exist
+```
+
+
+```text
+If status = todo
+→ completedAt must be null
+```
+
+---
+
+# 3. Design Data Model
+
+Everything starts from data.
+
+```javascript
+{
+  id: "",
+  title: "",
+  description: "",
+  status: "todo",
+  createdAt: "",
+  completedAt: null
+}
+```
+
+### Core Principle
+
+```text
+UI is a visual representation of data.
+```
+
+---
+
+# 4. Design Business State Machine
+
+Think about business states before React state.
+
+```text
+          +---------+
+          |  TODO   |
+          +---------+
+               |
+               |
+          Complete
+               |
+               ▼
+      +---------------+
+      |  COMPLETED    |
+      +---------------+
+```
+
+---
+
+# 5. Design User Journey
+
+```text
+Open App
+    ↓
+View Todos
+    ↓
+Search Todo
+    ↓
+Add Todo
+    ↓
+Edit Todo
+    ↓
+Complete Todo
+    ↓
+Delete Todo
+```
+
+---
+
+# 6. Map User Actions
+
+Every action should map to a function.
+
+| User Action | Function       |
+| ----------- | -------------- |
+| Add         | addTodo()      |
+| Edit        | updateTodo()   |
+| Delete      | deleteTodo()   |
+| Complete    | completeTodo() |
+| Search      | filterTodos()  |
+| Change Tab  | changeTab()    |
+
+---
+
+# 7. Discover Required State
+
+State should be discovered before coding.
+
+```javascript
+const [search, setSearch] = useState("");
+
+const [activeTab, setActiveTab] = useState("todo");
+
+const [todos, setTodos] = useState([]);
+
+const [loading, setLoading] = useState(true);
+
+const [isOpen, setIsOpen] = useState(false);
+```
+
+### State Discovery Rule
+
+```text
+Does the UI need this value?
+
+Yes → State
+
+No → Don't create state
+```
+
+---
+
+# 8. Design Data Flow
+
+Source of Truth:
+
+```text
+Firestore
+```
+
+Flow:
+
+```text
+Firestore
+      ↓
+onSnapshot()
+      ↓
+useTodos()
+      ↓
+App.jsx
+      ↓
+Components
+```
+
+### Principle
+
+```text
+Data flows downward.
+Actions flow upward.
+```
+
+---
+
+# 9. Design System Architecture
+
+```text
+┌─────────────────────┐
+│        UI           │
+└─────────────────────┘
+           ↓
+┌─────────────────────┐
+│      Hooks          │
+└─────────────────────┘
+           ↓
+
+┌─────────────────────┐
+│     Services        │
+└─────────────────────┘
+           ↓
+
+┌─────────────────────┐
+│     Firebase        │
+└─────────────────────┘
+```
+
+### Layer Responsibilities
+
+#### UI Layer
+
+Responsible for displaying data.
+
+#### Hook Layer
+
+Responsible for managing state and subscriptions.
+
+#### Service Layer
+
+Responsible for CRUD operations.
+
+#### Firebase Layer
+
+Responsible for data persistence.
+
+---
+
+# 10. Project Structure
 
 ```text
 src
 │
 ├── components
 │   ├── Navbar.jsx
-│   ├── Modal.jsx
 │   ├── TodoCard.jsx
-│   ├── NotFoundTodo.jsx
-│   └── AddAndUpdateTodo.jsx
+│   ├── AddAndUpdateTodo.jsx
+│   ├── Modal.jsx
+│   └── TodoNotFound.jsx
 │
 ├── hooks
-│   ├── useDisclosure.js
-│   └── useTodos.js
+│   ├── useTodos.js
+│   └── useDisclosure.js
 │
 ├── services
 │   └── todoService.js
@@ -103,287 +296,168 @@ src
 │   └── firebase.js
 │
 ├── App.jsx
-├── main.jsx
-└── index.css
+│
+└── main.jsx
 ```
 
 ---
 
-# 🗄️ Firestore Data Model
+# 11. Component Boundaries
 
-Each Todo document follows the structure:
-
-```js
-{
-  id: "abc123",
-
-  title: "Learn React",
-
-  description: "Build a production-ready Todo App",
-
-  status: "todo",
-
-  createdAt: Timestamp,
-
-  completedAt: null
-}
-```
-
-### Completed Todo Example
-
-```js
-{
-  id: "abc123",
-
-  title: "Learn React",
-
-  description: "Build a production-ready Todo App",
-
-  status: "completed",
-
-  createdAt: Timestamp,
-
-  completedAt: Timestamp
-}
-```
-
----
-
-# 🧠 System Design Thinking
-
-Before building the UI, the application was designed around data flow.
-
-## Data Flow
+Ask:
 
 ```text
-Firestore
-    │
-    ▼
-useTodos Hook
-    │
-    ▼
-App.jsx
-    │
-    ▼
-Components
+Which part changes independently?
 ```
 
----
-
-# ➕ Add Todo Flow
+Components:
 
 ```text
-User Clicks Add Button
-          │
-          ▼
-     Open Modal
-          │
-          ▼
-     Enter Details
-          │
-          ▼
-      Submit Form
-          │
-          ▼
- Firebase addDoc()
-          │
-          ▼
- Firestore Updated
-          │
-          ▼
- Real-Time Listener
-          │
-          ▼
- UI Updates Automatically
+Navbar
+TodoCard
+Modal
+AddAndUpdateTodo
+TodoNotFound
 ```
 
----
-
-# 📥 Load Todos Flow
+### Principle
 
 ```text
-Firestore
-    │
-    ▼
-onSnapshot()
-    │
-    ▼
-Todos State Updates
-    │
-    ▼
-Component Re-render
-    │
-    ▼
-Updated UI
+One Component = One Responsibility
 ```
 
 ---
 
-# ✔️ Complete Todo Flow
+# 12. UI Structure
 
 ```text
-User Clicks Complete
-          │
-          ▼
-      updateDoc()
-          │
-          ▼
- status = completed
- completedAt = timestamp
-          │
-          ▼
- Firestore Updated
-          │
-          ▼
- UI Updates Automatically
+--------------------------------
+| Firebase Todo App            |
+--------------------------------
+
+[ Search Todo ]      [+ Add]
+
+--------------------------------
+| Todo | Completed             |
+--------------------------------
+
+Todo Card
+
+Title
+Description
+
+Edit Complete Delete
 ```
 
 ---
 
-# 🔍 Search Flow
+# 13. Build Order
+
+Elite developers don't build randomly.
+
+Build from the foundation upward.
+
+### Step 1
+
+Setup Firebase
 
 ```text
-User Types Keyword
-        │
-        ▼
-Search State Updates
-        │
-        ▼
-Filter Todos
-        │
-        ▼
-Display Matching Results
+config/firebase.js
 ```
 
-### Search Logic
+### Step 2
 
-```js
-todos.filter((todo) =>
-  todo.title
-    .toLowerCase()
-    .includes(search.toLowerCase())
-);
-```
-
----
-
-# 🎯 Filter Flow
-
-### Pending Todos
-
-```js
-todo.status === "todo"
-```
-
-### Completed Todos
-
-```js
-todo.status === "completed"
-```
-
-### Tab State
-
-```js
-const [tab, setTab] = useState("todo");
-```
-
----
-
-# ✏️ Update Todo Flow
+Create Service Layer
 
 ```text
-User Clicks Edit
-        │
-        ▼
-Open Modal
-        │
-        ▼
-Load Existing Data
-        │
-        ▼
-Update Fields
-        │
-        ▼
-updateDoc()
-        │
-        ▼
-Firestore Updated
-        │
-        ▼
-UI Updates Automatically
+services/todoService.js
 ```
 
----
+Functions:
 
-# 🗑️ Delete Todo Flow
+```javascript
+createTodo()
+updateTodo()
+deleteTodo()
+completeTodo()
+```
+
+### Step 3
+
+Create Custom Hook
 
 ```text
-User Clicks Delete
-         │
-         ▼
-     deleteDoc()
-         │
-         ▼
- Firestore Updated
-         │
-         ▼
- UI Updates Automatically
+hooks/useTodos.js
 ```
 
----
+### Step 4
 
-# ⚙️ Environment Variables
+Create Utility Hook
 
-Create a `.env` file in the root directory:
-
-```env
-VITE_FIREBASE_API_KEY=
-
-VITE_FIREBASE_AUTH_DOMAIN=
-
-VITE_FIREBASE_PROJECT_ID=
-
-VITE_FIREBASE_STORAGE_BUCKET=
-
-VITE_FIREBASE_MESSAGING_SENDER_ID=
-
-VITE_FIREBASE_APP_ID=
+```text
+hooks/useDisclosure.js
 ```
 
+### Step 5
+
+Create Empty Components
+
+```text
+Navbar
+TodoCard
+Modal
+AddAndUpdateTodo
+TodoNotFound
+```
+
+### Step 6
+
+Build App Skeleton
+
+```text
+Navbar
+Tabs
+Todo List
+Modal
+```
+
+### Step 7
+
+Connect Firestore Data
+
+### Step 8
+
+Implement Add Todo
+
+### Step 9
+
+Implement Edit Todo
+
+### Step 10
+
+Implement Complete Todo
+
+### Step 11
+
+Implement Delete Todo
+
+### Step 12
+
+Implement Search
+
+### Step 13
+
+Implement Filter
+
+### Step 14
+
+Add Validation
+
+### Step 15
+
+Polish UI & UX
+
 ---
-
-
-# 🎯 Learning Outcomes
-
-This project demonstrates:
-
-* React Component Architecture
-* Custom Hooks
-* Firebase Firestore CRUD Operations
-* Real-Time Data Synchronization
-* Form Validation
-* State Management
-* Service Layer Pattern
-* Modern UI/UX Practices
-* Reusable Component Design
-
----
-
-# 🔮 Future Improvements
-
-* Firebase Authentication
-* User-specific Todos
-* Due Dates
-* Priority Levels
-* Categories
-* Dashboard Analytics
-* Drag & Drop Sorting
-* Dark Mode
-* Offline Support
-* Pagination & Infinite Scroll
-
----
-
 # 👨‍💻 Author
 
 **Shivam Kumar**
@@ -392,4 +466,28 @@ This project demonstrates:
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-connectoshivam-0A66C2?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/connectoshivam)
 [![Twitter](https://img.shields.io/badge/Twitter-connectoshivam-f6b355?style=for-the-badge&logo=x)](https://twitter.com/connectoshivam)
 
-Built to practice real-world React development, Firebase integration, and scalable frontend architecture.
+Before writing code, answer these questions:
+
+```text
+1. What problem am I solving?
+
+2. What data exists?
+
+3. What business rules exist?
+
+4. What states exist?
+
+5. What actions change those states?
+
+6. Where does data live?
+
+7. How does data flow?
+
+8. What architecture supports that flow?
+
+9. Which component owns which responsibility?
+
+10. What is the correct build order?
+```
+
+When these questions are answered, coding becomes implementation rather than problem-solving.

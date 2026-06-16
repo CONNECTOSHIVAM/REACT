@@ -1,33 +1,3 @@
-#🧠  Problem → Architecture → Code
-
-```text
-                   Problem
-                      ↓
-                Business Rules
-                      ↓
-                  Data Model
-                      ↓
-               State Machine
-                      ↓
-                User Journey
-                      ↓
-               User Actions
-                      ↓
-                State Design
-                      ↓
-                 Data Flow
-                      ↓
-              System Architecture
-                      ↓
-             Component Boundaries
-                      ↓
-                   UI Design
-                      ↓
-              Implementation
-```
-
----
-
 # 1. Understand The Problem
 
 ## System
@@ -38,22 +8,22 @@ Firebase Todo App
 
 Allow users to manage tasks efficiently.
 
-### Features
+## Features
 
-* Create Todo
-* Read Todos
-* Update Todo
-* Delete Todo
-* Search Todo
-* Complete Todo
-* Filter Todo
+ - Read Todo
+ - Create Todo
+ - Update Todo
+ - Complete Todo
+ - Delete Todo
+ - Search Todo
+ - Filter Todo
 
-### CRUD Mapping
+## CRUD Mapping
 
 | Operation | Feature     |
-| --------- | ----------- |
+| ------    |  ----       |
 | Create    | Add Todo    |
-| Read      | View Todos  |
+| Read      | View Todo   |
 | Update    | Edit Todo   |
 | Delete    | Delete Todo |
 
@@ -72,36 +42,36 @@ Before coding, define how the system behaves.
 ### States
 
 ```text
-todo
-completed
+   todo
+   completed
 ```
 
 ### State Rule
-
 ```text
-If status = completed
+if status = completed
 → completedAt must exist
 ```
 
 ```text
-If status = todo
+if status = todo
 → completedAt must be null
 ```
 
 ---
 
-# 3. Design Data Model
+# 3. Design Data Models
 
 Everything starts from data.
 
-```javascript
+```js
+
 {
-  id: "",
-  title: "",
-  description: "",
-  status: "todo",
-  createdAt: "",
-  completedAt: null
+    id: "",
+    title: "",
+    description: "",
+    status: "todo",
+    createdAt: "",
+    completedAt: null
 }
 ```
 
@@ -115,20 +85,23 @@ UI is a visual representation of data.
 
 # 4. Design Business State Machine
 
-Think about business states before React state.
+Think about business states before the React state.
 
 ```text
-          +---------+
-          |  TODO   |
-          +---------+
-               |
-               |
-          Complete
-               |
-               ▼
-      +---------------+
-      |  COMPLETED    |
-      +---------------+
+       +-----------------+
+       |      TODO       |
+       +-----------------+
+                |
+                |
+            Complete
+                |
+                |
+                ▼
+       +-----------------+
+       |   COMPLETED     |
+       +-----------------+
+
+
 ```
 
 ---
@@ -142,11 +115,11 @@ View Todos
     ↓
 Search Todo
     ↓
-Add Todo
-    ↓
-Edit Todo
+Create Todo
     ↓
 Complete Todo
+    ↓
+Edit Todo
     ↓
 Delete Todo
 ```
@@ -157,41 +130,36 @@ Delete Todo
 
 Every action should map to a function.
 
-| User Action | Function       |
-| ----------- | -------------- |
-| Add         | addTodo()      |
-| Edit        | updateTodo()   |
-| Delete      | deleteTodo()   |
-| Complete    | completeTodo() |
-| Search      | filterTodos()  |
-| Change Tab  | changeTab()    |
-
----
+| User Action | Function        |
+|-------------|-----------------|
+| Add         | addTodo()       |
+| Edit        | updateTodo()    |
+| Delete      | deleteTodo()    |
+| Complete    | completeTodo()  |
+| Search      | searchTodo()    |
+| filter      | fiterTodo()     |
 
 # 7. Discover Required State
 
 State should be discovered before coding.
 
-```javascript
+```js
+
+const [todos, setTodos] = useState([]);
+
 const [search, setSearch] = useState("");
 
 const [activeTab, setActiveTab] = useState("todo");
-
-const [todos, setTodos] = useState([]);
 
 const [loading, setLoading] = useState(true);
 
 const [isOpen, setIsOpen] = useState(false);
 ```
 
-### State Discovery Rule
-
 ```text
 Does the UI need this value?
-
 Yes → State
-
-No → Don't create state
+No  → Don't Create State
 ```
 
 ---
@@ -208,20 +176,20 @@ Flow:
 
 ```text
 Firestore
-      ↓
+    ↓
 onSnapshot()
-      ↓
+    ↓
 useTodos()
-      ↓
+    ↓
 App.jsx
-      ↓
+    ↓
 Components
 ```
 
 ### Principle
 
 ```text
-Data flows downward.
+Data flow downward.
 Actions flow upward.
 ```
 
@@ -230,24 +198,22 @@ Actions flow upward.
 # 9. Design System Architecture
 
 ```text
-┌─────────────────────┐
-│        UI           │
-└─────────────────────┘
-           ↓
+ ______________
+|      UI      |
+|______________|
+       ↓
+ ______________
+|     Hooks    |
+|______________|
+       ↓
+ ______________
+|   Services   |
+|______________|
+       ↓
+ ______________
+|   Firebase   |
+|______________|              
 
-┌─────────────────────┐
-│      Hooks          │
-└─────────────────────┘
-           ↓
-
-┌─────────────────────┐
-│     Services        │
-└─────────────────────┘
-           ↓
-
-┌─────────────────────┐
-│     Firebase        │
-└─────────────────────┘
 ```
 
 ### Layer Responsibilities
@@ -273,31 +239,34 @@ Responsible for data persistence.
 # 10. Project Structure
 
 ```text
+
 src
-│
+|
 ├── components
-│   ├── Navbar.jsx
-│   ├── TodoCard.jsx
-│   ├── AddAndUpdateTodo.jsx
-│   ├── Modal.jsx
-│   └── TodoNotFound.jsx
-│
+|    ├── Navbar.jsx
+|    ├── Modal.jsx
+|    ├── TodoCard.jsx
+|    ├── AddAndUpdateTodo.jsx
+|    └── TodoNotFound.jsx
+|
+|
 ├── hooks
-│   ├── useTodos.js
-│   └── useDisclosure.js
-│
+|     ├── useTodos.js
+|     └── useDisclosure.js
+|
 ├── services
-│   └── todoService.js
-│
+|      └── todoService.js
+|
 ├── schemas
-│   └── todoSchema.js
-│
+|      └── todoSchema.js
+|
 ├── config
-│   └── firebase.js
-│
+|      └── firebase.js
+|
 ├── App.jsx
-│
+├── index.css
 └── main.jsx
+
 ```
 
 ---
@@ -321,7 +290,6 @@ TodoNotFound
 ```
 
 ### Principle
-
 ```text
 One Component = One Responsibility
 ```
@@ -353,8 +321,6 @@ Edit Complete Delete
 
 # 13. Build Order
 
-Elite developers don't build randomly.
-
 Build from the foundation upward.
 
 ### Step 1
@@ -375,7 +341,7 @@ services/todoService.js
 
 Functions:
 
-```javascript
+```js
 createTodo()
 updateTodo()
 deleteTodo()
@@ -395,7 +361,7 @@ hooks/useTodos.js
 Create Utility Hook
 
 ```text
-hooks/useDisclosure.js
+useDisclosure.js
 ```
 
 ### Step 5
@@ -416,14 +382,15 @@ Build App Skeleton
 
 ```text
 Navbar
+Search
 Tabs
-Todo List
+TodoList
 Modal
 ```
 
 ### Step 7
 
-Connect Firestore Data
+Connect  Firebase Data
 
 ### Step 8
 
@@ -458,36 +425,13 @@ Add Validation
 Polish UI & UX
 
 ---
+
 # 👨‍💻 Author
+
+
 
 **Shivam Kumar**
 
 [![GitHub](https://img.shields.io/badge/GitHub-connectoshivam-181717?style=for-the-badge&logo=github)](https://github.com/connectoshivam)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-connectoshivam-0A66C2?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/connectoshivam)
 [![Twitter](https://img.shields.io/badge/Twitter-connectoshivam-f6b355?style=for-the-badge&logo=x)](https://twitter.com/connectoshivam)
-
-Before writing code, answer these questions:
-
-```text
-1. What problem am I solving?
-
-2. What data exists?
-
-3. What business rules exist?
-
-4. What states exist?
-
-5. What actions change those states?
-
-6. Where does data live?
-
-7. How does data flow?
-
-8. What architecture supports that flow?
-
-9. Which component owns which responsibility?
-
-10. What is the correct build order?
-```
-
-When these questions are answered, coding becomes implementation rather than problem-solving.
