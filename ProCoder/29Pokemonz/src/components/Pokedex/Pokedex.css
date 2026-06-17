@@ -1,0 +1,11 @@
+.pokedex-wrapper{
+    display: flex;
+    flex-direction: column;
+    
+}
+#pokemon-heading{
+    margin: 0 auto;
+    letter-spacing: 5px;
+    font-family: cursive;
+    color: rgb(199, 104, 36);
+}
