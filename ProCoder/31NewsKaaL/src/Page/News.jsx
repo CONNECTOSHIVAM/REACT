@@ -1,10 +1,10 @@
 import React from "react";
 import Wrapper from "../components/Wrapper";
 
-const News = () => {
+const News = ({className}) => {
   return (
   <Wrapper>
-     <div className="grid grid-cols-4 gap-4">
+     <div className={`grid grid-cols-4 gap-4 ${className}`}>
         <NewsCard/>
          <NewsCard/>
      <NewsCard/>
@@ -31,7 +31,7 @@ const NewsCard = () => {
             are title and actions parts
           </p>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
+            <button className="btn btn-soft btn-warning">Buy Now</button>
           </div>
         </div>
       </div>
