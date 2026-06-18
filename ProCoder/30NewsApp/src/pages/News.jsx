@@ -1,10 +1,10 @@
 import React from "react";
 import Wrapper from "../components/Wrapper";
 
-const News = () => {
+const News = ({className}) => {
   return (
     <Wrapper>
-      <div className="grid grid-cols-4 gap-4">
+      <div className={`grid grid-cols-4 gap-4 ${className}`}>
         <NewsCard />
         <NewsCard />
         <NewsCard />
@@ -17,7 +17,7 @@ const News = () => {
 
 const NewsCard = () => {
   return (
-    <div className="card bg-base-300  shadow-sm">
+    <div className={`card bg-base-300  shadow-sm `}>
       <figure>
         <img
           src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
