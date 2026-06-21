@@ -1,7 +1,28 @@
 import React from 'react'
 import Wrapper from './Wrapper'
+import { useNewsContext } from '../context/NewsContext'
 
 const Navbar = ({className}) => {
+
+  const {setNews, fetchNews} = useNewsContext();
+
+  let timer = null;
+  const searchNews = async(e) => {
+
+    const searchValue = e.target.value;
+    if(!searchValue) return;
+
+    clearTimeout(timer)
+
+    timer = setTimeout(async()=>{
+        const data = await fetchNews(`/everything?q=${searchValue}`);
+        setNews(data.articles) 
+    },1000);
+
+  }
+
+
+
   return (
     <div className={`${className}`}>
       <Wrapper>
@@ -10,7 +31,7 @@ const Navbar = ({className}) => {
     <a className="btn btn-ghost text-xl text-amber-400 font-mono">PAPER NEWS📰</a>
   </div>
   <div className="flex gap-2">
-    <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto border-amber-400 outline-1 focus:outline-amber-500" />
+    <input onChange={searchNews} type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto border-amber-400 outline-1 focus:outline-amber-500" />
     <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
