@@ -5,31 +5,26 @@ const NewsContext = createContext();
 
 const NewsContextProvider = ({ children }) => {
   const [news, setNews] = useState([]);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true);
 
   const fetchNews = async (url = "/everything?q=india") => {
 
     setLoading(true)
-     try {
-          const response = await api.get(
-      `${url}&apiKey=${import.meta.env.VITE_API_KEY}`,
+    try {
+      const response = await api.get(
+        `${url}&apiKey=${import.meta.env.VITE_API_KEY}`,
       );
+      console.log(response.data);
+      setLoading(false);
+      return response.data;
+    } catch (error) {
+      console.log(error);
       setLoading(false)
-     console.log(response.data);
-     return response.data
-     } catch (error) {
-       console.log(error);
-       setLoading(false)
-     }
+    }
   };
 
-  const value = {news, setNews, fetchNews, loading}
-
-  return (
-    <NewsContext.Provider value={value}>
-      {children}
-    </NewsContext.Provider>
-  );
+  const value = { news, setNews, fetchNews, loading };
+  return <NewsContext.Provider value={value}>{children}</NewsContext.Provider>;
 };
 
 const useNewsContext = () => {

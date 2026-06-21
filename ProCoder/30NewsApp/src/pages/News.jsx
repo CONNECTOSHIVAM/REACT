@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import Wrapper from "../components/Wrapper";
 import { useNewsContext } from "../context/NewsContext";
+import Loader from "../components/Loader";
 
 const News = ({ className }) => {
-  const { fetchNews, news, setNews } = useNewsContext();
+  const { fetchNews, news, setNews, loading } = useNewsContext();
 
   useEffect(() => {
     (async () => {
@@ -12,12 +13,13 @@ const News = ({ className }) => {
     })();
   }, []);
 
-  console.log(news);
+  if(loading) return <Loader className={`w-fit mx-auto py-24 mb-32`}/>
 
   return (
     <Wrapper>
       <div className={`grid grid-cols-4 gap-4 ${className}`}>
         {news.map((newsDetails, index) => {
+          if(!newsDetails.urlToImage)   return null; 
           return <NewsCard key={index} details={newsDetails} />;
         })}
       </div>
@@ -31,6 +33,7 @@ const NewsCard = ({ details }) => {
     <div className={`card bg-base-300  shadow-sm `}>
       <figure>
         <img
+          className="w-full aspect-video object-contain"
           src={details?.urlToImage}
           alt="Shoes"
         />
