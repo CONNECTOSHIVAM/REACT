@@ -18,7 +18,7 @@ const News = ({ className }) => {
   return (
     <Wrapper>
       <div className={`grid grid-cols-4 gap-4 ${className}`}>
-        {news.map((newsDetails, index) => {
+        {news.map((newsDetails,index) => {
           if(!newsDetails.urlToImage)   return null; 
           return <NewsCard key={index} details={newsDetails} />;
         })}
