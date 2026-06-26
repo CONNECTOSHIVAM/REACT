@@ -16,14 +16,29 @@ const ResultGrid = () => {
                 if(activeTab === 'photos')
                 {
                     let response = await fetchPhotos(query)
-                    console.log(response);
+                    data = response.map((item) => ({
+                        id: item.id,
+                        type: "photo",
+                        title: item.alt_description,
+                        thumbnail: item.urls.small,
+                        src: item.urls.full,
+                        url: item.links.html
+                    }))
                     
                 }
                 if(activeTab == "videos")
                 {
                     let response = await fetchVideos(query);
-                    console.log(response);
-                    
+                    let data = response.map((item)=>({
+                        id: item.id,
+                        type: "videos",
+                        title: item.user.name || 'video',
+                        thumbnail: item.image,
+                        src: item.video_files[0].link,
+                        url: item.url
+                        
+                    }))
+
                 }
                 if(activeTab == "gif")
                 {
