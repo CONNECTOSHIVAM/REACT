@@ -17,7 +17,7 @@ const ResultCard = ({item}) => {
       <a target='_blank' className='h-full' href={item.url}>
         {item.type == 'photo' ? <img className='h-full w-full object-cover object-center' src={item.src} alt=''/>  :''}
         {item.type == 'video' ? <video className='h-full w-full object-cover object-center' autoPlay loop muted src={item.src} ></video> : ''}
-        {item.type == 'gif' ? <img className='h-full w-full object-cover object-center' src={item.src}/> : ''}
+        {item.type == 'gif' ? <img   className='h-full w-full object-cover object-center' src={item.src}/> : ''}
       </a>
       <div id='bottom' className='flex justify-between gap-3 items-center w-full px-4 py-6 absolute bottom-0 text-white'>
         <h2 className='text-lg font-semibold capitalize h-14 overflow-hidden'>{item.title}</h2>
