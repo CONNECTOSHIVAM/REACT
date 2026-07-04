@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>Todo</h1>
+      <p class="subtitle">Stay on top of what matters</p>
+    </header>
+
+    <form class="add-form" id="addForm">
+      <input
+        type="text"
+        id="todoInput"
+        placeholder="What needs to be done?"
+        autocomplete="off"
+        maxlength="200"
+      />
+      <button type="submit" aria-label="Add todo">+</button>
+    </form>
+
+    <div class="toolbar">
+      <div class="filters" role="tablist">
+        <button class="filter active" data-filter="all">All</button>
+        <button class="filter" data-filter="active">Active</button>
+        <button class="filter" data-filter="completed">Done</button>
+      </div>
+      <span class="count" id="count">0 items left</span>
+    </div>
+
+    <ul class="todo-list" id="todoList"></ul>
+
+    <div class="empty" id="emptyState">
+      <p>No todos yet. Add one above!</p>
+    </div>
+
+    <footer class="footer">
+      <button class="clear-btn" id="clearCompleted" hidden>Clear completed</button>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
